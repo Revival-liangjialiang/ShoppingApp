@@ -79,7 +79,6 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
     int pic_data_len;
     BufferedWriter writer;
     FileInputStream pic_input;
-    Bitmap cropImageView_bitmap;
     Button start_camera, open_album;
     CommonTabLayout commonTabLayout;
     //登录界面控件声明处
@@ -638,6 +637,7 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
     }
     public void SendData(Bitmap bitmap){
         //剪完之后的图片
+        selerct_pic_source_linLayout.setVisibility(View.GONE);
         final Bitmap bitmap_2 = Bitmap.createScaledBitmap(bitmap, 200, 200, false);
         myView.bitmap = bitmap_2;
         myView.postInvalidate();
