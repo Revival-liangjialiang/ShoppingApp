@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/FlycoTabLayout_Lib/FlycoTabLayout_Lib.iml" filepath="$PROJECT_DIR$/FlycoTabLayout_Lib/FlycoTabLayout_Lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MarqueeView/MarqueeView.iml" filepath="$PROJECT_DIR$/MarqueeView/MarqueeView.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ShoppingApp2.iml" filepath="$PROJECT_DIR$/ShoppingApp2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library_PullToRefresh/library_PullToRefresh.iml" filepath="$PROJECT_DIR$/library_PullToRefresh/library_PullToRefresh.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rollviewpager/rollviewpager.iml" filepath="$PROJECT_DIR$/rollviewpager/rollviewpager.iml" />
+    </modules>
+  </component>
+</project>

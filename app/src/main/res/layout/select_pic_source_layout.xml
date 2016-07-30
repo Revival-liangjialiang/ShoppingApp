@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:visibility="gone"
+    android:id="@+id/select_pic_source_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#8000"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_centerInParent="true"
+    >
+<Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:text="相册"
+    android:textColor="@color/titlec"
+    android:id="@+id/open_album"
+    android:background="@drawable/pic_source_background_top"
+    />
+    <Button
+        android:layout_marginTop="1px"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="相机"
+        android:textColor="@color/titlec"
+        android:id="@+id/start_camera"
+        android:background="@drawable/pic_source_background_bottom"
+        />
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/select_pic_source_layout_cancel_button"
+        android:text="取消"
+        android:textColor="@color/titlec"
+        android:background="@drawable/pic_source_background"
+        />
+</LinearLayout>
+</RelativeLayout>

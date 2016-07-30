@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/two_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EAEEEF"
+    android:orientation="vertical">
+
+    <include layout="@layout/navigation"></include>
+
+    <com.example.k.shoppingapp.Util.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/percent_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="40%w"
+            app:layout_widthPercent="100%w">
+
+            <com.jude.rollviewpager.RollPagerView
+                android:id="@+id/roll_view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:rollviewpager_hint_gravity="center"
+                app:rollviewpager_hint_paddingBottom="0dp"
+                app:rollviewpager_hint_paddingLeft="0dp"
+                app:rollviewpager_hint_paddingRight="0dp"
+                app:rollviewpager_hint_paddingTop="0dp"
+                app:rollviewpager_play_delay="5000"></com.jude.rollviewpager.RollPagerView>
+        </LinearLayout>
+    </com.example.k.shoppingapp.Util.PercentRelativeLayout>
+
+    <include layout="@layout/classification"></include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/linearlayoutstype"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/Carousel_navigation_imageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/jinritoutiao" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="50dp"
+            android:src="@drawable/thread" />
+
+        <com.sunfusheng.marqueeview.MarqueeView
+            android:id="@+id/marqueeView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            app:mvSingleLine="true"
+            app:mvTextColor="#9090" />
+    </LinearLayout>
+
+    <com.example.k.shoppingapp.Util.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#9090"
+            android:orientation="horizontal"
+            app:layout_heightPercent="50%w"
+            app:layout_widthPercent="100%w">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="1px"
+                android:layout_weight="4"
+                android:background="@drawable/frame">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:id="@+id/xianshiImager"
+                    />
+                <cn.iwgang.countdownview.CountdownView
+                    android:id="@+id/cv_countdownViewTest1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    app:isHideTimeBackground="false"
+                    app:isShowDay="false"
+                    app:isShowHour="true"
+                    app:isShowMillisecond="false"
+                    app:isShowMinute="true"
+                    app:isShowSecond="true"
+                    app:isShowTimeBgDivisionLine="false"
+                    app:suffixGravity="center"
+                    app:suffixTextColor="#000000"
+                    app:suffixTextSize="20sp"
+                    app:timeBgColor="#FF5000"
+                    app:timeTextColor="#FFFFFF"
+                    app:timeTextSize="20sp" />
+            </FrameLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="6"
+                android:background="#505050"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/jishiyouImager"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="1px"
+                    android:layout_weight="1"
+                    android:background="@drawable/frame"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_launcher" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/jishiyouxiao1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="1px"
+                        android:layout_weight="1"
+                        android:background="@drawable/frame"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/ic_launcher" />
+
+                    <ImageView
+                        android:id="@+id/jishiyouxiao2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/frame"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/ic_launcher" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.example.k.shoppingapp.Util.PercentLinearLayout>
+
+    <com.example.k.shoppingapp.Util.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/chaoshihuiTOP"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/frame"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher"
+            app:layout_heightPercent="30%w" />
+    </com.example.k.shoppingapp.Util.PercentLinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:text="超实惠"
+        android:textColor="@android:color/holo_red_dark" />
+    <!-- 与内存无关-->
+    <include layout="@layout/super_benefits_layout"></include>
+
+    <include layout="@layout/go_for_a_walk"></include>
+
+    <include layout="@layout/hot_market_layout"></include>
+</LinearLayout>

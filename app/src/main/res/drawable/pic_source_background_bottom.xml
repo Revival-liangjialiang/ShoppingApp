@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- 定义四个角的弧度  -->
+    <corners
+        android:bottomLeftRadius="3dip"
+        android:bottomRightRadius="3dip"
+        />
+    <!-- 定义背景颜色 -->
+    <solid android:color="#FFFFFF" />
+    <!-- 设置颜色渐变 -->
+</shape>

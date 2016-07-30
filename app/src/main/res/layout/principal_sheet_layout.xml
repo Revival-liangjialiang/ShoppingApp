@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ptr="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.k.shoppingapp.MainActivity">
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+        android:id="@+id/pull_to_refresh_scroll"
+        ptr:ptrHeaderTextColor="#ACB4BF"
+        ptr:ptrHeaderBackground="#F2F7FB"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+            <include layout="@layout/navigation_bar_layout"></include>
+        </ScrollView>
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
+</RelativeLayout>
