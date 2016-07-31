@@ -83,6 +83,10 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
     CommonTabLayout commonTabLayout;
     //登录界面控件声明处
     TextView sign_in_id_TextView;
+    boolean sign_in_boolean = true;
+
+    //注册界面
+    boolean register_boolean = true;
 
     final int NETWORK = 5;
     final int REGISTER_SUCCESS = 0;
@@ -91,7 +95,7 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
     final int SIGN_IN_PASSWORD_ERROR = 3;
     final int NO_USER = 4;
     CheckBox checkBox;
-    MyView myView;
+    public MyView myView;
     boolean checkBoxBooleanValue = false;
     HttpURLConnection connection;
     Gson gson = new Gson();
@@ -272,6 +276,12 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
 
     private void init_selerct_pic_source_linLayout() {
         selerct_pic_source_linLayout = (RelativeLayout) getActivity().findViewById(R.id.select_pic_source_layout);
+        selerct_pic_source_linLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selerct_pic_source_linLayout.setVisibility(View.GONE);
+            }
+        });
     }
 
     /*
@@ -283,7 +293,7 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
             @Override
             public void onClick(View view) {
                 l.setVisibility(View.GONE);
-                //sign_in_success_layout.setVisibility(View.GONE);
+                sign_in_success_layout.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
                 selerct_pic_source_linLayout.setVisibility(View.VISIBLE);
             }
         });
@@ -336,134 +346,150 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
                 l.setVisibility(View.VISIBLE);
                 break;
             case R.id.registerButton:
-                register_user_name = register_UserNameET.getText().toString();
-                register_user_pw = register_UserPasswordET.getText().toString();
-                String register_again_input_user_pw = register_UserPassword_again_inputET.getText().toString();
-                //两次密码一致才会进入
-                if (register_user_pw.equals(register_again_input_user_pw)) {
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
+                if(register_boolean) {
+                    register_user_name = register_UserNameET.getText().toString();
+                    register_user_pw = register_UserPasswordET.getText().toString();
+                    String register_again_input_user_pw = register_UserPassword_again_inputET.getText().toString();
+                    //两次密码一致才会进入
+                    if (register_user_pw.equals(register_again_input_user_pw)) {
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
 
-                            try {
-                                url = new URL("http://120.27.103.151:8088/PicServiceDemo/MyServlet?username=" + register_user_name + "&userpassword=" + register_user_pw);
-                            } catch (MalformedURLException e) {
-                                e.printStackTrace();
-                            }
-                            try {
-                                connection = (HttpURLConnection) url.openConnection();
-                            } catch (IOException e) {
-                                Message message = new Message();
-                                message.what = NETWORK;
-                                handler.sendMessage(message);
-                                e.printStackTrace();
-                            }
-                            try {
-                                connection.setRequestMethod("GET");
-                            } catch (ProtocolException e) {
-                                e.printStackTrace();
-                            }
-                            connection.setRequestProperty("charset", "UTF-8");
-                            connection.setReadTimeout(8000);
-                            connection.setConnectTimeout(8000);
-                            StringBuilder s = new StringBuilder();
-                            try {
-                                if (connection.getResponseCode() == 200) {
-                                    BufferedReader buff = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                                    StringBuilder builder = new StringBuilder();
-                                    String line;
-                                    try {
-                                        while ((line = buff.readLine()) != null) {
-                                            builder.append(line);
-                                        }
-                                    } catch (IOException e) {
-                                        Message message = new Message();
-                                        message.what = NETWORK;
-                                        handler.sendMessage(message);
-                                        e.printStackTrace();
-                                    }
-                                    String register_response_json = builder.toString();
-                                    Register_Response register_response = gson.fromJson(register_response_json, Register_Response.class);
-                                    if (register_response.Response_code.equals("ok")) {
-                                        Message message = new Message();
-                                        message.what = REGISTER_SUCCESS;
-                                        message.obj = register_response.ID;
-                                        handler.sendMessage(message);
-                                    } else {
-                                        Message message = new Message();
-                                        message.what = REGISTER_FAIL;
-                                        handler.sendMessage(message);
-                                    }
+                                try {
+                                    url = new URL("http://120.27.103.151:8088/PicServiceDemo/MyServlet?username=" + register_user_name + "&userpassword=" + register_user_pw);
+                                } catch (MalformedURLException e) {
+                                    e.printStackTrace();
                                 }
-                            } catch (IOException e) {
-                                Message message = new Message();
-                                message.what = NETWORK;
-                                handler.sendMessage(message);
-                                e.printStackTrace();
+                                try {
+                                    connection = (HttpURLConnection) url.openConnection();
+                                } catch (IOException e) {
+                                    register_boolean = true;
+                                    Message message = new Message();
+                                    message.what = NETWORK;
+                                    handler.sendMessage(message);
+                                    e.printStackTrace();
+                                }
+                                try {
+                                    connection.setRequestMethod("GET");
+                                } catch (ProtocolException e) {
+                                    register_boolean = true;
+                                    e.printStackTrace();
+                                }
+                                connection.setRequestProperty("charset", "UTF-8");
+                                connection.setReadTimeout(8000);
+                                connection.setConnectTimeout(8000);
+                                StringBuilder s = new StringBuilder();
+                                try {
+                                    if (connection.getResponseCode() == 200) {
+                                        BufferedReader buff = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                                        StringBuilder builder = new StringBuilder();
+                                        String line;
+                                        try {
+                                            while ((line = buff.readLine()) != null) {
+                                                builder.append(line);
+                                            }
+                                        } catch (IOException e) {
+                                            register_boolean = true;
+                                            Message message = new Message();
+                                            message.what = NETWORK;
+                                            handler.sendMessage(message);
+                                            e.printStackTrace();
+                                        }
+                                        String register_response_json = builder.toString();
+                                        Register_Response register_response = gson.fromJson(register_response_json, Register_Response.class);
+                                        if (register_response.Response_code.equals("ok")) {
+                                            Message message = new Message();
+                                            message.what = REGISTER_SUCCESS;
+                                            message.obj = register_response.ID;
+                                            handler.sendMessage(message);
+                                        } else {
+                                            register_boolean = true;
+                                            Message message = new Message();
+                                            message.what = REGISTER_FAIL;
+                                            handler.sendMessage(message);
+                                        }
+                                    }
+                                } catch (IOException e) {
+                                    register_boolean = true;
+                                    Message message = new Message();
+                                    message.what = NETWORK;
+                                    handler.sendMessage(message);
+                                    e.printStackTrace();
+                                }
+
                             }
+                        }).start();
 
-                        }
-                    }).start();
-
-                } else {
-                    Toast.makeText(getContext(), "两次输入密码不一致！", Toast.LENGTH_SHORT).show();
+                    } else {
+                        register_boolean = true;
+                        Toast.makeText(getContext(), "两次输入密码不一致！", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
                 }
-                break;
             case R.id.backClickPic:
                 l.setVisibility(View.GONE);
                 break;
             case R.id.sign_inButton:
-                final String sign_in_userName = sign_in_UserNameET.getText().toString();
-                final String sign_in_user_pw = sign_in_userPasswordET.getText().toString();
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            sign_in_url = new URL("http://120.27.103.151:8088/PicServiceDemo/MyServlet?ID=" + sign_in_userName + "&userpassword=" + sign_in_user_pw);
-                            sign_in_connection = (HttpURLConnection) sign_in_url.openConnection();
-                            sign_in_connection.setRequestMethod("POST");
-                            sign_in_connection.setConnectTimeout(8000);
-                            sign_in_connection.setReadTimeout(8000);
-                            sign_in_connection.setRequestProperty("charset", "UTF-8");
-                            StringBuilder sign_in_builder = new StringBuilder();
-                            String sign_in_line;
-                            if (sign_in_connection.getResponseCode() == 200) {
-                                BufferedReader sign_in_reader = new BufferedReader(new InputStreamReader(sign_in_connection.getInputStream()));
-                                while ((sign_in_line = sign_in_reader.readLine()) != null) {
-                                    sign_in_builder.append(sign_in_line);
-                                }
-                                Sign_in_Response sign_in_response = gson.fromJson(sign_in_builder.toString(), Sign_in_Response.class);
-                                try {
-                                    if (sign_in_response.Login_results.equals("ok")) {
-                                        Message message = new Message();
-                                        message.what = SIGN_IN_SUCCESS;
-                                        message.obj = sign_in_response;
-                                        handler.sendMessage(message);
-                                    } else if (sign_in_response.Login_results.equals("no_pass_word")) {
-                                        Message message = new Message();
-                                        message.what = SIGN_IN_PASSWORD_ERROR;
-                                        handler.sendMessage(message);
-                                    } else {
-                                        Message message = new Message();
-                                        message.what = NO_USER;
-                                        handler.sendMessage(message);
+                if(sign_in_boolean) {
+                    sign_in_boolean = false;
+                    final String sign_in_userName = sign_in_UserNameET.getText().toString();
+                    final String sign_in_user_pw = sign_in_userPasswordET.getText().toString();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                sign_in_url = new URL("http://120.27.103.151:8088/PicServiceDemo/MyServlet?ID=" + sign_in_userName + "&userpassword=" + sign_in_user_pw);
+                                sign_in_connection = (HttpURLConnection) sign_in_url.openConnection();
+                                sign_in_connection.setRequestMethod("POST");
+                                sign_in_connection.setConnectTimeout(8000);
+                                sign_in_connection.setReadTimeout(8000);
+                                sign_in_connection.setRequestProperty("charset", "UTF-8");
+                                StringBuilder sign_in_builder = new StringBuilder();
+                                String sign_in_line;
+                                if (sign_in_connection.getResponseCode() == 200) {
+                                    BufferedReader sign_in_reader = new BufferedReader(new InputStreamReader(sign_in_connection.getInputStream()));
+                                    while ((sign_in_line = sign_in_reader.readLine()) != null) {
+                                        sign_in_builder.append(sign_in_line);
                                     }
-                                } catch (Exception e) {
-                                    Log.i("ok", "登录结果判断块错误！");
+                                    Sign_in_Response sign_in_response = gson.fromJson(sign_in_builder.toString(), Sign_in_Response.class);
+                                    try {
+                                        if (sign_in_response.Login_results.equals("ok")) {
+                                            Message message = new Message();
+                                            message.what = SIGN_IN_SUCCESS;
+                                            message.obj = sign_in_response;
+                                            handler.sendMessage(message);
+                                        } else if (sign_in_response.Login_results.equals("no_pass_word")) {
+                                            sign_in_boolean = true;
+                                            Message message = new Message();
+                                            message.what = SIGN_IN_PASSWORD_ERROR;
+                                            handler.sendMessage(message);
+                                        } else {
+                                            sign_in_boolean = true;
+                                            Message message = new Message();
+                                            message.what = NO_USER;
+                                            handler.sendMessage(message);
+                                        }
+                                    } catch (Exception e) {
+                                        sign_in_boolean = true;
+                                        Log.i("ok", "登录结果判断块错误！");
+                                    }
                                 }
-                            }
 
-                        } catch (MalformedURLException e) {
-                            e.printStackTrace();
-                        } catch (IOException e) {
-                            Message message = new Message();
-                            message.what = NETWORK;
-                            handler.sendMessage(message);
-                            e.printStackTrace();
+                            } catch (MalformedURLException e) {
+                                sign_in_boolean = true;
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                sign_in_boolean = true;
+                                Message message = new Message();
+                                message.what = NETWORK;
+                                handler.sendMessage(message);
+                                e.printStackTrace();
+                            }
                         }
-                    }
-                }).start();
-                break;
+                    }).start();
+                    break;
+                }
             default:
                 break;
         }
@@ -637,6 +663,7 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
     }
     public void SendData(Bitmap bitmap){
         //剪完之后的图片
+        sign_in_success_layout.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
         selerct_pic_source_linLayout.setVisibility(View.GONE);
         final Bitmap bitmap_2 = Bitmap.createScaledBitmap(bitmap, 200, 200, false);
         myView.bitmap = bitmap_2;

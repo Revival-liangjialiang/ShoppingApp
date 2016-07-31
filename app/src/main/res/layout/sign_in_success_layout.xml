@@ -1,100 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/sign_in_success"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:visibility="gone"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:visibility="gone">
+
     <RelativeLayout
-         android:layout_width="match_parent"
-        android:background="#FF6800"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="#FF6800">
+
         <ImageView
-            android:layout_margin="4dp"
-            android:layout_alignParentLeft="true"
+            android:layout_marginTop="3dp"
             android:id="@+id/back_main"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:src="@drawable/back_pic"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="4dp"
             android:scaleType="centerCrop"
-            />
+            android:src="@drawable/back_pic" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#ffffff"
             android:layout_centerInParent="true"
-            android:textSize="20sp"
             android:text="用户界面"
-            />
-        <Spinner
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <ImageButton
+            android:layout_marginTop="3dp"
+            android:id="@+id/modify"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginRight="4dp"
+            android:background="@drawable/modify_pic"
             android:layout_alignParentRight="true"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:id="@+id/spinner"
-            android:entries="@array/week"
-            android:background="@mipmap/ic_launcher"
             />
+
     </RelativeLayout>
+
     <com.example.k.shoppingapp.Other.MyView
-        android:layout_marginTop="4dp"
-        android:layout_below="@+id/CropImageView"
         android:id="@+id/MyView"
-        android:layout_gravity="center_horizontal"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        />
+        android:layout_below="@+id/CropImageView"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="4dp" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
+
         <TableLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            >
+            android:layout_centerInParent="true">
+
             <TableRow>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="用户名:"
-            android:textColor="@color/titlec"
-            />
-        <TextView
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/user_name_TextView"
-            android:layout_gravity="center_horizontal"
-            />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="用户名:"
+                    android:textColor="@color/titlec" />
+
+                <TextView
+                    android:id="@+id/user_name_TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp" />
             </TableRow>
+
             <TableRow>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="登录账号:"
-                    android:textColor="@color/titlec"
-                    />
+                    android:textColor="@color/titlec" />
+
                 <TextView
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
+                    android:id="@+id/user_id_TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/user_id_TextView"
                     android:layout_gravity="center_horizontal"
-                    />
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp" />
             </TableRow>
         </TableLayout>
     </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="我的收藏"
-            />
+            android:text="我的收藏" />
     </LinearLayout>
 </LinearLayout>
