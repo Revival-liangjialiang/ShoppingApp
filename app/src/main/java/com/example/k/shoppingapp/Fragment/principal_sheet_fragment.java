@@ -20,8 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.k.shoppingapp.R;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.adapter.LoopPagerAdapter;
 import com.jude.rollviewpager.hintview.IconHintView;
@@ -38,13 +36,11 @@ import cn.iwgang.countdownview.CountdownView;
 @SuppressLint("ValidFragment")
 public class principal_sheet_fragment extends Fragment implements View.OnClickListener {
     int jishiPicArrayId[] = {R.mipmap.jishi,R.mipmap.jishiyou,R.mipmap.jishiyouxiao1,R.mipmap.jishiyouxiao2};
-    PullToRefreshScrollView p;
     ImageView jishi,jishiyou,jishiyouxiao1,jishiyouxiao2,chaoshihuiTOP;
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            p.onRefreshComplete();
         }
     };
     Button nvzhuang, nanzhuang, nvxie, nanxie, kuzi, maozi, diannao, shouji, shipin, qinglvzhuang;
@@ -60,7 +56,6 @@ public class principal_sheet_fragment extends Fragment implements View.OnClickLi
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
-        setPullToRefreshScrollView();
         initMarqueeView();
         initCountdownView();
         initjishiView();
@@ -108,37 +103,6 @@ public class principal_sheet_fragment extends Fragment implements View.OnClickLi
         });
     }
 
-    private void setPullToRefreshScrollView() {
-
-        p = (PullToRefreshScrollView) getActivity().findViewById(R.id.pull_to_refresh_scroll);
-        try {
-            p.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
-                @Override
-                public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                    Toast.makeText(getActivity(), "okok!", Toast.LENGTH_SHORT).show();
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                Thread.sleep(4000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            Message message = new Message();
-                            handler.sendMessage(message);
-                        }
-                    }).start();
-                }
-
-                @Override
-                public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-
-                }
-            });
-        }catch (Exception e){
-            Log.i("PullToRefreshScrollView","有错误！");
-        }
-    }
     private void initView() {
         mRollViewPager = (RollPagerView) getActivity().findViewById(R.id.roll_view_pager);
         mRollViewPager.setAnimationDurtion(500);

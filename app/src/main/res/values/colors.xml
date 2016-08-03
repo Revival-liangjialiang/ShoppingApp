@@ -6,5 +6,7 @@
     <color name="titlec">#FF6800</color>
     <color name="clr_normal">#FFFFFF</color>
     <color name="clr_pressed">#99E5FE</color>
+    <color name="tt">#E77843</color>
+    <color name="white">#FFFFFF</color>
 
 </resources>

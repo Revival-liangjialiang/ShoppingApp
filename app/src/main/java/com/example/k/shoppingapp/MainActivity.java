@@ -1,7 +1,5 @@
 package com.example.k.shoppingapp;
 
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Build;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
@@ -26,8 +24,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-
-    ViewPager viewPager;
+    int b;
+    public ViewPager viewPager;
     int a;
     my_account_fragment w;
     private CommonTabLayout mTabLayout_2;
@@ -46,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             setTranslucentStatus(true);
             SystemBarTintManager tintManager = new SystemBarTintManager(this);
             tintManager.setStatusBarTintEnabled(true);
-            tintManager.setStatusBarTintResource(R.color.titlec);// 通知栏颜色
+            tintManager.setStatusBarTintResource(R.color.tt);// 通知栏颜色
         }
         ViewGroup mContentView = (ViewGroup) findViewById(Window.ID_ANDROID_CONTENT);
         View mChildView = mContentView.getChildAt(0);
@@ -57,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         //以下是下拉刷新代码
 
     }
+
 
     private void initCommonTabLayout() {
         //添加所需要的所有数据
@@ -123,12 +122,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if(w.l.getVisibility()==View.VISIBLE||w.selerct_pic_source_linLayout.getVisibility()==View.VISIBLE) {
+            if (w.l.getVisibility() == View.VISIBLE || w.selerct_pic_source_linLayout.getVisibility() == View.VISIBLE) {
                 w.l.setVisibility(View.GONE);
+                w.my_scrollView.setVisibility(View.GONE);
                 w.selerct_pic_source_linLayout.setVisibility(View.GONE);
-            }else{
+            } else {
                 a++;
-                if(a<2) {
+                if (a < 2) {
                     Toast.makeText(this, "再点击一次将退出程序", Toast.LENGTH_SHORT).show();
                 }
                 new Thread(new Runnable() {
@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         try {
                             Thread.sleep(3000);
-                            a=0;
+                            a = 0;
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -145,9 +145,11 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
-        if(a==2){
+        if (a == 2) {
             finish();
         }
         return false;
     }
+
+
 }

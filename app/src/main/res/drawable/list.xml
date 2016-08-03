@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item android:right="2dip" android:top="2dip">
+        <bitmap android:src="@mipmap/button_2"
+            android:gravity="center"/>
+    </item>
+    <item>
+        <bitmap android:src="@mipmap/button"
+            android:gravity="center"/>
+    </item>
+
+
+</layer-list>

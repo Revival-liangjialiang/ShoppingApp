@@ -8,22 +8,22 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Count_down" />
             <option value="$PROJECT_DIR$/FlycoTabLayout_Lib" />
             <option value="$PROJECT_DIR$/MarqueeView" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/library" />
-            <option value="$PROJECT_DIR$/library_PullToRefresh" />
+            <option value="$PROJECT_DIR$/pullToRefreshlibrary" />
             <option value="$PROJECT_DIR$/rollviewpager" />
           </set>
         </option>
         <option name="myModules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Count_down" />
             <option value="$PROJECT_DIR$/FlycoTabLayout_Lib" />
             <option value="$PROJECT_DIR$/MarqueeView" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/library" />
-            <option value="$PROJECT_DIR$/library_PullToRefresh" />
+            <option value="$PROJECT_DIR$/pullToRefreshlibrary" />
             <option value="$PROJECT_DIR$/rollviewpager" />
           </set>
         </option>

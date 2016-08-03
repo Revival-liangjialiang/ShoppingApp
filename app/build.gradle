@@ -24,9 +24,9 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile project(':rollviewpager')
-    compile project(':library_PullToRefresh')
     compile project(':MarqueeView')
-    compile project(':library')
+    compile project(':Count_down')
     compile project(':FlycoTabLayout_Lib')
+    compile project(':pullToRefreshlibrary')
     compile 'com.google.code.gson:gson:2.7'
 }

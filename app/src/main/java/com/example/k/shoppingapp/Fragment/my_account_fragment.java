@@ -21,21 +21,26 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.k.shoppingapp.Adapter.MyPullListener;
 import com.example.k.shoppingapp.MainActivity;
 import com.example.k.shoppingapp.Other.MyView;
 import com.example.k.shoppingapp.R;
@@ -43,6 +48,7 @@ import com.example.k.shoppingapp.Util.Register_Response;
 import com.example.k.shoppingapp.Util.Sign_in_Response;
 import com.flyco.tablayout.CommonTabLayout;
 import com.google.gson.Gson;
+import com.jingchen.pulltorefresh.PullToRefreshLayout;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -84,9 +90,19 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
     //登录界面控件声明处
     TextView sign_in_id_TextView;
     boolean sign_in_boolean = true;
+    ImageView back_image;
+    ImageButton pic_modify_button;
+   public RelativeLayout modify_layout;
+    Button modify_buuton;
+    RelativeLayout sign_success_main_layout;
+    public MyView myView;
+    public ScrollView scrollView,my_scrollView;
 
-    //注册界面
+    //注册界面导航字段
     boolean register_boolean = true;
+
+    //下拉控件导航字段
+    PullToRefreshLayout pullToRefreshLayout;
 
     final int NETWORK = 5;
     final int REGISTER_SUCCESS = 0;
@@ -95,7 +111,6 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
     final int SIGN_IN_PASSWORD_ERROR = 3;
     final int NO_USER = 4;
     CheckBox checkBox;
-    public MyView myView;
     boolean checkBoxBooleanValue = false;
     HttpURLConnection connection;
     Gson gson = new Gson();
@@ -110,7 +125,7 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
     EditText sign_in_UserNameET, sign_in_userPasswordET, register_UserNameET, register_UserPasswordET, register_UserPassword_again_inputET;
     TextView registerTV;
     TextView user_name_TextView;
-    MainActivity m;
+    public MainActivity m;
     public LinearLayout l;
     LinearLayout sign_in_success_layout;
     public RelativeLayout selerct_pic_source_linLayout;
@@ -169,7 +184,8 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
                         editor.putString("user_password", sign_in_userPasswordET.getText().toString());
                         editor.commit();
                     }
-                    sign_in_layout.setVisibility(View.GONE);
+                    scrollView.setVisibility(View.GONE);
+                    sign_success_main_layout.setVisibility(View.VISIBLE);
                     sign_in_successs_linearLayout.setVisibility(View.VISIBLE);
                     break;
                 case REGISTER_FAIL:
@@ -185,7 +201,7 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
                     Toast.makeText(getContext(), "NetWork Abnormal!", Toast.LENGTH_SHORT).show();
                     break;
                 case 8:
-                    sign_in_success_layout.setVisibility(View.VISIBLE);
+                    sign_success_main_layout.setVisibility(View.VISIBLE);
                     commonTabLayout.setVisibility(View.VISIBLE);
                     break;
                 case 10:
@@ -222,6 +238,7 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
         //改变头像
         change_head_portrait();
         init_selerct_pic_source_cancel_button();
+        initPullToRefresh();
     }
 
 
@@ -293,6 +310,7 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
             @Override
             public void onClick(View view) {
                 l.setVisibility(View.GONE);
+                my_scrollView.setVisibility(View.GONE);
                 sign_in_success_layout.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
                 selerct_pic_source_linLayout.setVisibility(View.VISIBLE);
             }
@@ -316,6 +334,13 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
     }
 
     private void initView() {
+        my_scrollView = (ScrollView)getActivity().findViewById(R.id.MyScrollView_2);
+        scrollView = (ScrollView) getActivity().findViewById(R.id.scrollView);
+        sign_success_main_layout = (RelativeLayout)getActivity().findViewById(R.id.sign_in_success_main_layout);
+        modify_buuton = (Button)getActivity().findViewById(R.id.modify_button);
+        modify_layout = (RelativeLayout)getActivity().findViewById(R.id.modify_select_layout);
+        pic_modify_button = (ImageButton)getActivity().findViewById(R.id.modify);
+        back_image = (ImageView)getActivity().findViewById(R.id.back_main);
         sign_in_id_TextView = (TextView)getActivity().findViewById(R.id.user_id_TextView);
         user_name_TextView = (TextView) getActivity().findViewById(R.id.user_name_TextView);
         sign_in_button = (Button) getActivity().findViewById(R.id.sign_inButton);
@@ -333,7 +358,11 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
         back_IV.setOnClickListener(this);
         sign_in_button.setOnClickListener(this);
         register_button.setOnClickListener(this);
-    }
+        back_image.setOnClickListener(this);
+        pic_modify_button.setOnClickListener(this);
+        modify_layout.setOnClickListener(this);
+        modify_buuton.setOnClickListener(this);
+}
 
     public my_account_fragment(MainActivity m) {
         this.m = m;
@@ -344,6 +373,7 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
         switch (view.getId()) {
             case R.id.registerTextView:
                 l.setVisibility(View.VISIBLE);
+                my_scrollView.setVisibility(View.VISIBLE);
                 break;
             case R.id.registerButton:
                 if(register_boolean) {
@@ -429,9 +459,17 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
                 }
             case R.id.backClickPic:
                 l.setVisibility(View.GONE);
+                my_scrollView.setVisibility(View.GONE);
                 break;
             case R.id.sign_inButton:
                 if(sign_in_boolean) {
+                    InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if(imm.isActive()&&getActivity().getCurrentFocus()!=null){
+                        if (getActivity().getCurrentFocus().getWindowToken()!=null) {
+                            Log.i("ok","有软键盘！");
+                            imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                        }
+                    }
                     sign_in_boolean = false;
                     final String sign_in_userName = sign_in_UserNameET.getText().toString();
                     final String sign_in_user_pw = sign_in_userPasswordET.getText().toString();
@@ -490,6 +528,19 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
                     }).start();
                     break;
                 }
+                break;
+                case R.id.back_main:
+                    m.viewPager.setCurrentItem(0);
+                    break;
+                case R.id.modify:
+                 modify_layout.setVisibility(View.VISIBLE);
+                    break;
+            case R.id.modify_button:
+                selerct_pic_source_linLayout.setVisibility(View.VISIBLE);
+                modify_layout.setVisibility(View.GONE);
+                break;
+            case R.id.modify_select_layout:
+                modify_layout.setVisibility(View.GONE);
             default:
                 break;
         }
@@ -736,6 +787,9 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
         File dirFile = new File(path);
         if (!dirFile.exists()) {
             dirFile.mkdir();
+        }else {
+            dirFile.delete();
+            dirFile.createNewFile();
         }
         File myCaptureFile = new File(path, fileName);
         BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(myCaptureFile));
@@ -744,5 +798,50 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
         bos.close();
         Log.i("ok", "执行文件存储成功！");
         return myCaptureFile;
+    }
+    //初始化下拉控件
+    private void initPullToRefresh() {
+         pullToRefreshLayout = ((PullToRefreshLayout) getActivity().findViewById(R.id.refresh_view));
+        pullToRefreshLayout.setOnPullListener(new MyPullListener());
+        //加载更多的监听
+        pullToRefreshLayout.setOnLoadmoreProcessListener(new MyOnPullProcessListener());
+        //下拉刷新的监听
+        pullToRefreshLayout.setOnRefreshProcessListener(new MyOnPullProcessListener());
+    }
+    public class MyOnPullProcessListener implements PullToRefreshLayout.OnPullProcessListener
+    {
+        //一下拉第一个调用的方法调用一次
+        @Override
+        public void onPrepare(View v, int which)
+        {
+            // TODO Auto-generated method stub
+        }
+        //当触发了刷新操作就会被调用一次
+        @Override
+        public void onStart(View v, int which)
+        {
+            // TODO Auto-generated method stub
+        }
+        //当下拉刷新已经被触发后，在放开的时候就会被调用一次
+        @Override
+        public void onHandling(View v, int which)
+        {
+            // TODO Auto-generated method stub
+
+        }
+        //刷新完成的时候调用一次
+        @Override
+        public void onFinish(View v, int which)
+        {
+            // TODO Auto-generated method stub
+
+        }
+        //一直往下拉就会不断连续的调用
+        @Override
+        public void onPull(View v, float pullDistance, int which)
+        {
+            // TODO Auto-generated method stub
+        }
+
     }
 }

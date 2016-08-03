@@ -10,20 +10,33 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.RadioButton;
 
 /**
  * Created by k on 2016/7/31.
  */
-public class start_Activity extends AppCompatActivity{
-    Handler handler = new Handler(){
+public class start_Activity extends AppCompatActivity {
+
+    RadioButton r;
+    Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            Intent intent = new Intent(start_Activity.this,MainActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+            switch (msg.what) {
+                case 0:
+                    Intent intent = new Intent(start_Activity.this, MainActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+                    break;
+                case 1:
+                    finish();
+                    break;
+                default:
+                    break;
+            }
         }
     };
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +57,14 @@ public class start_Activity extends AppCompatActivity{
             @Override
             public void run() {
                 try {
-                    Thread.sleep(2500);
+                    Thread.sleep(1500);
                     Message message = new Message();
+                            message.what = 0;
                     handler.sendMessage(message);
+                    Thread.sleep(3000);
+                    Message message_2 = new Message();
+                    message_2.what = 1;
+                    handler.sendMessage(message_2);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sign_in_success_main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone"
+    >
+<LinearLayout
     android:id="@+id/sign_in_success"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:visibility="gone">
+    >
 
     <RelativeLayout
+        android:id="@+id/sign_in_interface_navigation_relative_layout"
         android:layout_width="match_parent"
-        android:layout_height="46dp"
+        android:layout_height="50dp"
         android:background="#FF6800">
 
         <ImageView
-            android:layout_marginTop="3dp"
             android:id="@+id/back_main"
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="4dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
             android:scaleType="centerCrop"
             android:src="@drawable/back_pic" />
 
@@ -34,9 +42,11 @@
             android:id="@+id/modify"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_marginRight="4dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/modify_pic"
             android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
             />
 
     </RelativeLayout>
@@ -106,3 +116,21 @@
             android:text="我的收藏" />
     </LinearLayout>
 </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/modify_select_layout"
+        android:visibility="gone"
+        android:layout_marginTop="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <Button
+            android:layout_alignParentRight="true"
+            android:id="@+id/modify_button"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:text="@string/modify"
+            android:background="@drawable/list"
+            />
+    </RelativeLayout>
+</RelativeLayout>
