@@ -1,6 +1,7 @@
 package com.example.k.shoppingapp.Fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,17 +10,17 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.k.shoppingapp.Activity.Search_Activity;
 import com.example.k.shoppingapp.R;
+import com.example.k.shoppingapp.We_Code.CaptureActivity;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.adapter.LoopPagerAdapter;
 import com.jude.rollviewpager.hintview.IconHintView;
@@ -35,6 +36,10 @@ import cn.iwgang.countdownview.CountdownView;
  */
 @SuppressLint("ValidFragment")
 public class principal_sheet_fragment extends Fragment implements View.OnClickListener {
+    final int WE_CODE = 5;
+    //Home navigation
+    ImageView we_code_ImageView;
+    TextView search_TextView;
     int jishiPicArrayId[] = {R.mipmap.jishi,R.mipmap.jishiyou,R.mipmap.jishiyouxiao1,R.mipmap.jishiyouxiao2};
     ImageView jishi,jishiyou,jishiyouxiao1,jishiyouxiao2,chaoshihuiTOP;
     Handler handler = new Handler(){
@@ -104,6 +109,8 @@ public class principal_sheet_fragment extends Fragment implements View.OnClickLi
     }
 
     private void initView() {
+        search_TextView = (TextView)getActivity().findViewById(R.id.search_TextView);
+        we_code_ImageView = (ImageView)getActivity().findViewById(R.id.we_code_ImageView);
         mRollViewPager = (RollPagerView) getActivity().findViewById(R.id.roll_view_pager);
         mRollViewPager.setAnimationDurtion(500);
         mRollViewPager.setAdapter(new TestLoopAdapter(mRollViewPager));
@@ -128,6 +135,8 @@ public class principal_sheet_fragment extends Fragment implements View.OnClickLi
         shouji.setOnClickListener(this);
         shipin.setOnClickListener(this);
         qinglvzhuang.setOnClickListener(this);
+        we_code_ImageView.setOnClickListener(this);
+        search_TextView.setOnClickListener(this);
     }
 
     private class TestLoopAdapter extends LoopPagerAdapter {
@@ -215,6 +224,13 @@ public class principal_sheet_fragment extends Fragment implements View.OnClickLi
             case R.id.qinglvzhuang:
                 Toast.makeText(getActivity(), "情侣装", Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.we_code_ImageView:
+                startActivityForResult(new Intent(getActivity(), CaptureActivity.class), WE_CODE);
+                break;
+            case R.id.search_TextView:
+                startActivity(new Intent(getContext(), Search_Activity.class));
+                getActivity().overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+                break;
             default:
                 break;
         }
@@ -246,5 +262,14 @@ public class principal_sheet_fragment extends Fragment implements View.OnClickLi
             inSampleSize = heightRatio < widthRatio ? widthRatio : heightRatio;
         }
         return inSampleSize;
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == WE_CODE && resultCode == getActivity().RESULT_OK) {
+            Toast.makeText(getContext(), "扫描数据="+data.getStringExtra(CaptureActivity.EXTRA_RESULT), Toast.LENGTH_SHORT).show();
+        } else {
+
+        }
     }
 }

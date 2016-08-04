@@ -12,6 +12,7 @@
     android:orientation="vertical"
     >
     <ImageView
+        android:id="@+id/we_code_ImageView"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_gravity="center_horizontal"
@@ -44,7 +45,8 @@
                 android:src="@drawable/ic_change_history_black_24dp"
                 />
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/search_TextView"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:text="搜索你的宝贝..."
                 android:textColor="#FFFFFF"

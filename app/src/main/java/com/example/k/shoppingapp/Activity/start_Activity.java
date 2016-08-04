@@ -1,10 +1,9 @@
-package com.example.k.shoppingapp;
+package com.example.k.shoppingapp.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.PersistableBundle;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,7 +11,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.RadioButton;
 
-import com.example.k.shoppingapp.Activity.MainActivity;
+import com.example.k.shoppingapp.R;
 
 /**
  * Created by k on 2016/7/31.

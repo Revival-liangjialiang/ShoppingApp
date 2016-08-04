@@ -8,5 +8,7 @@
     <color name="clr_pressed">#99E5FE</color>
     <color name="tt">#E77843</color>
     <color name="white">#FFFFFF</color>
+    <color name="style_gray">#E6EBEF</color>
+    <color name="search_frame_style_color">#27304F</color>
 
 </resources>

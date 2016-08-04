@@ -5,9 +5,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
 
+import com.example.k.shoppingapp.Activity.MainActivity;
 import com.example.k.shoppingapp.Fragment.my_account_fragment;
 import com.example.k.shoppingapp.Fragment.principal_sheet_fragment;
-import com.example.k.shoppingapp.MainActivity;
 
 /**
  * Created by k on 2016/7/22.

@@ -1,10 +1,10 @@
-package com.example.k.shoppingapp;
+package com.example.k.shoppingapp.Activity;
 
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.k.shoppingapp.Adapter.MyFragmentPagerAdapter;
 import com.example.k.shoppingapp.Fragment.my_account_fragment;
 import com.example.k.shoppingapp.Other.SystemBarTintManager;
+import com.example.k.shoppingapp.R;
 import com.example.k.shoppingapp.Util.TabEntity;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
             tintManager.setStatusBarTintEnabled(true);
             tintManager.setStatusBarTintResource(R.color.tt);// 通知栏颜色
         }
+        //设置预留状态栏位置
         ViewGroup mContentView = (ViewGroup) findViewById(Window.ID_ANDROID_CONTENT);
         View mChildView = mContentView.getChildAt(0);
         if (mChildView != null) {
