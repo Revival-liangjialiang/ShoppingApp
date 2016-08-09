@@ -2,6 +2,7 @@
 <com.example.k.shoppingapp.Util.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="50dp"
+    android:id="@+id/navigation"
     android:background="#FF6800"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal">
@@ -46,7 +47,7 @@
                 />
             <TextView
                 android:id="@+id/search_TextView"
-                android:layout_width="110dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="搜索你的宝贝..."
                 android:textColor="#FFFFFF"

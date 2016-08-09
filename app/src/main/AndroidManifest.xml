@@ -26,12 +26,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".We_Code.CaptureActivity"></activity>
+        <activity android:name=".We_Code.CaptureActivity"
+            android:windowSoftInputMode="adjustNothing"
+            android:theme="@style/NotitleTheme"
+            ></activity>
         <activity android:name=".Activity.MainActivity"
             android:theme="@style/NotitleTheme"
+            android:windowSoftInputMode="adjustNothing"
             ></activity>
         <activity android:name=".Activity.Search_Activity"
             android:theme="@style/NotitleTheme"
+            android:windowSoftInputMode="adjustNothing"
             ></activity>
     </application>
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        <com.example.k.shoppingapp.Extend.Custom_ViewGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+           <ImageView
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:background="#9090FF"
+               />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FFF000"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#9090FF"/>
+        </com.example.k.shoppingapp.Extend.Custom_ViewGroup>
+</RelativeLayout>

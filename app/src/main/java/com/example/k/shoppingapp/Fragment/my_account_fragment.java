@@ -76,6 +76,7 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
     Bitmap bitMap;
     Uri album_pic_uri;
     Uri cut_pic_uri;
+    Uri loop_uri;
 
     //换头像字段
     OutputStream pic_out;
@@ -134,6 +135,7 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
                 case REGISTER_SUCCESS:
                     LinearLayout l = (LinearLayout) getActivity().findViewById(R.id.linearLayout);
                     l.setVisibility(View.GONE);
+                    my_scrollView.setVisibility(View.GONE);
                     sign_in_UserNameET.setText((String) msg.obj);
                     Toast.makeText(getContext(), "注册成功账号为：" + (String) msg.obj, Toast.LENGTH_SHORT).show();
                     break;
@@ -145,7 +147,6 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
                         @Override
                         public void run() {
                             Log.i("ok", "线程已启动");
-                            //TODO------------------------------------------------------------------------------------------------------------------------
                             try {
                                 URL sign_in_url_2 = new URL("http://120.27.103.151:8088/PicServiceDemo/MyServlet?user_id_=" + sign_in_UserNameET.getText().toString());
                                 HttpURLConnection sign_in_connection_2 = (HttpURLConnection) sign_in_url_2.openConnection();
@@ -250,7 +251,7 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
     }
 
     private void change_head_portrait() {
-        //TODO
+
         commonTabLayout = (CommonTabLayout) getActivity().findViewById(R.id.tl_2);
         sign_in_success_layout = (LinearLayout) getActivity().findViewById(R.id.sign_in_success);
         start_camera = (Button) getActivity().findViewById(R.id.start_camera);
@@ -267,8 +268,7 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
 
             @Override
             public void onClick(View v) {
-                File outputImage = new File(Environment
-                        .getExternalStorageDirectory(), "output_image.jpg");// Environment.getExternalStorageDirectory()获取SD卡的根目录.
+                File outputImage = new File(Environment.getExternalStorageDirectory(), "output_image.jpg");// Environment.getExternalStorageDirectory()获取SD卡的根目录.
                 try {
                     if (outputImage.exists()) {
                         outputImage.delete();
@@ -285,7 +285,6 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
             }
         });
 
-        //TODO-----------------------------------------------------------------------------------------------------------------
     }
 
     private void init_selerct_pic_source_linLayout() {
@@ -558,20 +557,6 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
         }
         return inSampleSize;
     }
-//压缩图片
-    public static Bitmap decodeSampledBitmapFromResource(String pic_path, int MyWidth, int MyHeight) throws Exception {
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        /**被赋值为true返回的Bitmap为null，虽然Bitmap是null了，但是BitmapFactory.Options的outWidth、
-         *outHeight和outMimeType属性都会被赋值。这个技巧让我们可以在加载图片之前就获取到图片的长宽值和MIME类型，从而根据情况对图片进行压缩
-         */
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(pic_path, options);
-        //得到压缩倍数。
-        options.inSampleSize = calculateInSampleSize(options, MyWidth, MyHeight);
-        //设置为false，就能得到Bitmap
-        options.inJustDecodeBounds = false;
-        return BitmapFactory.decodeFile(pic_path, options);
-    }
 
     /*
     *
@@ -587,12 +572,15 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
             case TAKE_PHOTO:
                 if (resultCode == getActivity().RESULT_OK) {
                     try {
+                        //TODO
+                        File loop_file = new File(Environment.getExternalStorageDirectory(), "ok.jpg");// Environment.getExternalStorageDirectory()获取SD卡的根目录.
+                        loop_uri = Uri.fromFile(loop_file);
                         Intent intent = new Intent("com.android.camera.action.CROP");
                         intent.setDataAndType(imageUri, "image/*");
                         intent.putExtra("scale", true);
                         intent.putExtra("aspectX", 1);// 裁剪框比例
                         intent.putExtra("aspectY", 1);
-                        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);// 剪完放在放在imageUri下。
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, loop_uri);// 剪完放在放在imageUri下。
                         startActivityForResult(intent, CROP_PHOTO);// 启动裁剪程序。
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -604,7 +592,7 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
                     try {
                         bitMap = BitmapFactory
                                 .decodeStream(getActivity().getContentResolver().openInputStream(
-                                        imageUri));// 解码。
+                                        loop_uri));// 解码。
                        SendData(bitMap);
                         bitMap.recycle();
                     } catch (Exception e) {
@@ -672,7 +660,6 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
                 cut_pic_file.createNewFile();
 
             } catch (Exception e) {
-                // TODO: handle exception
             }
             cut_pic_uri = Uri.fromFile(cut_pic_file);
             Intent intent = new Intent("com.android.camera.action.CROP");
@@ -749,7 +736,7 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
                     pic_connection.setConnectTimeout(8000);
                     pic_connection.setReadTimeout(8000);
                     pic_out = pic_connection.getOutputStream();
-                    pic_input = new FileInputStream(saveFile(bitmap_2, Environment.getExternalStorageDirectory().getPath(), "ok.png"));
+                    pic_input = new FileInputStream(saveFile(bitmap_2, Environment.getExternalStorageDirectory().getPath(), "ok_1.png"));
                     while ((pic_data_len = pic_input.read()) != -1) {
                         pic_out.write(pic_data_len);
                     }
@@ -782,9 +769,7 @@ public class my_account_fragment extends Fragment implements View.OnClickListene
     //把位图变成文件存储起来，返回文件存储的路径
     public static File saveFile(Bitmap bm, String path, String fileName) throws IOException {
         File dirFile = new File(path);
-        if (!dirFile.exists()) {
-            dirFile.mkdir();
-        }else {
+        if (dirFile.exists()) {
             dirFile.delete();
             dirFile.createNewFile();
         }

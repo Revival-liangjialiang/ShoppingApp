@@ -28,6 +28,12 @@ import pl.droidsonroids.gif.GifDrawable;
  */
 public class PullToRefreshLayout extends RelativeLayout
 {
+    //TODO Revival_Liang改写的地方
+    float valueX = 0;
+    float X = 0;
+    float valueY = 0;
+    float Y = 0;
+    //--------------------------------------
     public static final String TAG = "PullToRefreshLayout";
     // 初始状态
     public static final int INIT = 0;
@@ -496,137 +502,141 @@ public class PullToRefreshLayout extends RelativeLayout
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev)
     {
-        switch (ev.getActionMasked())
-        {
+        switch (ev.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
+                //TODO Revival_Liang改写的地方
+                valueX = ev.getX();
+                valueY = ev.getY();
+                //-----------------------------------
                 downY = ev.getY();
                 lastY = downY;
                 timer.cancel();
                 mEvents = 0;
                 releasePull();
                 break;
+
             case MotionEvent.ACTION_POINTER_DOWN:
             case MotionEvent.ACTION_POINTER_UP:
                 // 过滤多点触碰
                 mEvents = -1;
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (null != mOnRefreshProcessListener && pullDownY > 0)
-                {
-                    if (!mPreparedPullDown)
-                    {
-                        mPreparedPullDown = true;
-                        if (null != mOnRefreshProcessListener)
-                        {
-                            mOnRefreshProcessListener.onPrepare(refreshView,
-                                    OnPullProcessListener.REFRESH);
-                        }
-                    }
-                    mOnRefreshProcessListener.onPull(refreshView, pullDownY,
-                            OnPullProcessListener.REFRESH);
+                //TODO Revival_Liang改写的地方
+                if (valueX > ev.getX()) {
+                    X = valueX - ev.getX();
+                } else {
+                    X = ev.getX() - valueX;
                 }
-                if (null != mOnLoadmoreProcessListener && pullUpY < 0)
-                {
-                    if (!mPreparedPullUp)
-                    {
-                        mPreparedPullUp = true;
-                        if (null != mOnLoadmoreProcessListener)
-                        {
-                            mOnLoadmoreProcessListener.onPrepare(loadmoreView,
-                                    OnPullProcessListener.LOADMORE);
-                        }
-                    }
-                    mOnLoadmoreProcessListener.onPull(loadmoreView, pullUpY,
-                            OnPullProcessListener.LOADMORE);
+                if (valueY > ev.getY()) {
+                    Y = valueY - ev.getY();
+                } else {
+                    Y = ev.getY() - valueY;
                 }
-                if (mEvents == 0)
-                {
-                    if (pullDownY > 0
-                            || (((Pullable) pullableView).canPullDown()
-                            && mCanPullDown && mPullDownEnable && state != LOADING))
-                    {
-                        // 可以下拉，正在加载时不能下拉
-                        // 对实际滑动距离做缩小，造成用力拉的感觉
-                        pullDownY = pullDownY + (ev.getY() - lastY) / radio;
-                        if (pullDownY < 0)
-                        {
-                            pullDownY = 0;
-                            mCanPullDown = false;
-                            mCanPullUp = true;
+                //---------------------------------------------------
+                if(Y>X){
+                    if (null != mOnRefreshProcessListener && pullDownY > 0) {
+                        if (!mPreparedPullDown) {
+                            mPreparedPullDown = true;
+                            if (null != mOnRefreshProcessListener) {
+                                mOnRefreshProcessListener.onPrepare(refreshView,
+                                        OnPullProcessListener.REFRESH);
+                            }
                         }
-                        if (pullDownY > getMeasuredHeight())
-                            pullDownY = getMeasuredHeight();
-                        if (state == REFRESHING)
-                        {
-                            // 正在刷新的时候触摸移动
-                            isTouch = true;
+                        mOnRefreshProcessListener.onPull(refreshView, pullDownY,
+                                OnPullProcessListener.REFRESH);
+                    }
+                    if (null != mOnLoadmoreProcessListener && pullUpY < 0) {
+                        if (!mPreparedPullUp) {
+                            mPreparedPullUp = true;
+                            if (null != mOnLoadmoreProcessListener) {
+                                mOnLoadmoreProcessListener.onPrepare(loadmoreView,
+                                        OnPullProcessListener.LOADMORE);
+                            }
                         }
-                    } else if (pullUpY < 0
-                            || (((Pullable) pullableView).canPullUp() && mCanPullUp
-                            && mPullUpEnable && state != REFRESHING))
-                    {
-                        // 可以上拉，正在刷新时不能上拉
-                        pullUpY = pullUpY + (ev.getY() - lastY) / radio;
-                        if (pullUpY > 0)
-                        {
-                            pullUpY = 0;
-                            mCanPullDown = true;
-                            mCanPullUp = false;
-                        }
-                        if (pullUpY < -getMeasuredHeight())
-                            pullUpY = -getMeasuredHeight();
-                        if (state == LOADING)
-                        {
-                            // 正在加载的时候触摸移动
-                            isTouch = true;
-                        }
+                        mOnLoadmoreProcessListener.onPull(loadmoreView, pullUpY,
+                                OnPullProcessListener.LOADMORE);
+                    }
+                    if (mEvents == 0) {
+                        if (pullDownY > 0
+                                || (((Pullable) pullableView).canPullDown()
+                                && mCanPullDown && mPullDownEnable && state != LOADING)) {
+                            // 可以下拉，正在加载时不能下拉
+                            // 对实际滑动距离做缩小，造成用力拉的感觉
+                            pullDownY = pullDownY + (ev.getY() - lastY) / radio;
+                            if (pullDownY < 0) {
+                                pullDownY = 0;
+                                mCanPullDown = false;
+                                mCanPullUp = true;
+                            }
+                            if (pullDownY > getMeasuredHeight())
+                                pullDownY = getMeasuredHeight();
+                            if (state == REFRESHING) {
+                                // 正在刷新的时候触摸移动
+                                isTouch = true;
+                            }
+                        } else if (pullUpY < 0
+                                || (((Pullable) pullableView).canPullUp() && mCanPullUp
+                                && mPullUpEnable && state != REFRESHING)) {
+                            // 可以上拉，正在刷新时不能上拉
+                            pullUpY = pullUpY + (ev.getY() - lastY) / radio;
+                            if (pullUpY > 0) {
+                                pullUpY = 0;
+                                mCanPullDown = true;
+                                mCanPullUp = false;
+                            }
+                            if (pullUpY < -getMeasuredHeight())
+                                pullUpY = -getMeasuredHeight();
+                            if (state == LOADING) {
+                                // 正在加载的时候触摸移动
+                                isTouch = true;
+                            }
+                        } else
+                            releasePull();
                     } else
-                        releasePull();
-                } else
-                    mEvents = 0;
-                lastY = ev.getY();
-                // 根据下拉距离改变比例
-                radio = (float) (2 + 2 * Math.tan(Math.PI / 2 / getMeasuredHeight()
-                        * (pullDownY + Math.abs(pullUpY))));
-                if (pullDownY > 0 || pullUpY < 0)
-                    requestLayout();
-                if (pullDownY > 0)
-                {
-                    if (pullDownY <= refreshDist
-                            && (state == RELEASE_TO_REFRESH || state == DONE))
-                    {
-                        // 如果下拉距离没达到刷新的距离且当前状态是释放刷新，改变状态为下拉刷新
-                        changeState(INIT);
-                    }
-                    if (pullDownY >= refreshDist && state == INIT)
-                    {
-                        // 如果下拉距离达到刷新的距离且当前状态是初始状态刷新，改变状态为释放刷新
-                        changeState(RELEASE_TO_REFRESH);
-                    }
-                } else if (pullUpY < 0)
-                {
-                    // 下面是判断上拉加载的，同上，注意pullUpY是负值
-                    if (-pullUpY <= loadmoreDist
-                            && (state == RELEASE_TO_LOAD || state == DONE))
-                    {
-                        changeState(INIT);
-                    }
-                    // 上拉操作
-                    if (-pullUpY >= loadmoreDist && state == INIT)
-                    {
-                        changeState(RELEASE_TO_LOAD);
-                    }
+                        mEvents = 0;
+                    lastY = ev.getY();
+                    // 根据下拉距离改变比例
+                    radio = (float) (2 + 2 * Math.tan(Math.PI / 2 / getMeasuredHeight()
+                            * (pullDownY + Math.abs(pullUpY))));
+                    if (pullDownY > 0 || pullUpY < 0)
+                        requestLayout();
+                    if (pullDownY > 0) {
+                        if (pullDownY <= refreshDist
+                                && (state == RELEASE_TO_REFRESH || state == DONE)) {
+                            // 如果下拉距离没达到刷新的距离且当前状态是释放刷新，改变状态为下拉刷新
+                            changeState(INIT);
+                        }
+                        if (pullDownY >= refreshDist && state == INIT) {
+                            // 如果下拉距离达到刷新的距离且当前状态是初始状态刷新，改变状态为释放刷新
+                            changeState(RELEASE_TO_REFRESH);
+                        }
+                    } else if (pullUpY < 0) {
+                        // 下面是判断上拉加载的，同上，注意pullUpY是负值
+                        if (-pullUpY <= loadmoreDist
+                                && (state == RELEASE_TO_LOAD || state == DONE)) {
+                            changeState(INIT);
+                        }
+                        // 上拉操作
+                        if (-pullUpY >= loadmoreDist && state == INIT) {
+                            changeState(RELEASE_TO_LOAD);
+                        }
 
-                }
-                // 因为刷新和加载操作不能同时进行，所以pullDownY和pullUpY不会同时不为0，因此这里用(pullDownY +
-                // Math.abs(pullUpY))就可以不对当前状态作区分了
-                if ((pullDownY + Math.abs(pullUpY)) > 8)
-                {
-                    // 防止下拉过程中误触发长按事件和点击事件
-                    ev.setAction(MotionEvent.ACTION_CANCEL);
+                    }
+                    // 因为刷新和加载操作不能同时进行，所以pullDownY和pullUpY不会同时不为0，因此这里用(pullDownY +
+                    // Math.abs(pullUpY))就可以不对当前状态作区分了
+                    if ((pullDownY + Math.abs(pullUpY)) > 8) {
+                        // 防止下拉过程中误触发长按事件和点击事件
+                        ev.setAction(MotionEvent.ACTION_CANCEL);
+                    }
                 }
                 break;
             case MotionEvent.ACTION_UP:
+                // TODO Revival_Liang改写的地方
+                valueX = 0f;
+                X = 0;
+                valueY = 0f;
+                Y = 0;
+                //--------------------------------
                 if (pullDownY > refreshDist || -pullUpY > loadmoreDist)
                 // 正在刷新时往下拉（正在加载时往上拉），释放后下拉头（上拉头）不隐藏
                 {
