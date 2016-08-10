@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="@color/white"
-    android:layout_height="wrap_content">
+    android:background="@color/style_gray"
+    android:layout_height="match_parent">
     <LinearLayout
+        android:background="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -30,6 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:background="#ffffff"
                 >
     <Button
         android:layout_gravity="center_vertical"
@@ -45,7 +47,7 @@
         android:layout_gravity="center_vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/Edit_Text"
         android:background="@android:color/transparent"
         android:layout_weight="1" />
             </LinearLayout>
@@ -57,6 +59,7 @@
          />
         </com.example.k.shoppingapp.Util.PercentLinearLayout>
     <Button
+        android:id="@+id/search_button"
         android:layout_gravity="center_vertical"
         android:layout_width="45dp"
         android:layout_height="30dp"
@@ -65,5 +68,32 @@
         android:text="搜索"
         />
     </LinearLayout>
+    <RelativeLayout
+        android:background="#ffffff"
+        android:layout_marginTop="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_alignParentLeft="true"
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="历史记录"
+            />
+        <TextView
+            android:layout_alignParentRight="true"
+            android:id="@+id/clear"
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="清空"
+            />
+    </RelativeLayout>
 
+    <com.example.k.shoppingapp.Extend.DynamicTagFlowLayout
+        android:background="#ffffff"
+        android:id="@+id/dynamic_tag"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        ></com.example.k.shoppingapp.Extend.DynamicTagFlowLayout>
 </LinearLayout>

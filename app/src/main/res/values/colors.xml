@@ -10,5 +10,6 @@
     <color name="white">#FFFFFF</color>
     <color name="style_gray">#E6EBEF</color>
     <color name="search_frame_style_color">#27304F</color>
+    <color name="History_record_button_color">#BBC1CD</color>
 
 </resources>

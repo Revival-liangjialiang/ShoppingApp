@@ -3,18 +3,15 @@ package com.example.k.shoppingapp.Extend;
 import android.content.Context;
 import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Scroller;
 
 /**
- * Created by k on 2016/8/9.
+ * Created by k on 2016/8/9.  
  */
 public class custom_ViewGroup extends ViewGroup {
-    Button button;
     int custom_ViewGroup_height = 0;
     int child_Count = 0;
     float start_value = 0;
@@ -32,9 +29,6 @@ public class custom_ViewGroup extends ViewGroup {
         custom_ViewGroup_height = getHeight();
         child_Count = getChildCount();
         MarginLayoutParams params = (MarginLayoutParams) getLayoutParams();
-        params.width = getWidth();
-        Log.i("ok","-----------------高="+custom_ViewGroup_height);
-        Log.i("ok","-----------------宽="+getWidth());
         params.height = child_Count * custom_ViewGroup_height;
         setLayoutParams(params);
         for (int a = 0; a < child_Count; a++) {
@@ -72,7 +66,7 @@ public class custom_ViewGroup extends ViewGroup {
             default:
                 break;
         }
-        //处理滑动过界情况
+        //处理滑动过界情况  
         if(getScrollY()<0){
             scrollTo(0,0);
         }
@@ -81,12 +75,12 @@ public class custom_ViewGroup extends ViewGroup {
         }
         return true;
     }
-//实现复位，目前仅支持两页，可以根据自己的需求改
+    //实现复位，目前仅支持两页，可以根据自己的需求改
     private void reset() {
         int mEnd = getScrollY();
-        //属于当前页面的Y最大值
+        //属于当前页面的Y最大值  
         int current_page_maxY ;
-        //当前属于第几页
+        //当前属于第几页  
         int current_page = getScrollY()/custom_ViewGroup_height;
         current_page_maxY = current_page*custom_ViewGroup_height;
         int reset_value = mEnd - current_page_maxY;
@@ -106,7 +100,7 @@ public class custom_ViewGroup extends ViewGroup {
             postInvalidate();
         }
     }
-//处理手指离开事件，注意当屏幕上从两只手指以上的其中一只手指离开才会调用此方法
+    //处理手指离开事件，注意当屏幕上从两只手指以上的其中一只手指离开才会调用此方法
     private void up_Method(MotionEvent event) {
         int leave_index = MotionEventCompat.getActionIndex(event);
         int leave_pointerID = MotionEventCompat.getPointerId(event, leave_index);
@@ -116,7 +110,7 @@ public class custom_ViewGroup extends ViewGroup {
             pointer_ID = MotionEventCompat.getPointerId(event,newPointerIndex);
         }
     }
-    //处理手指按下事件，此时屏幕必须不少于两只手指
+    //处理手指按下事件，此时屏幕必须不少于两只手指  
     private void down_Method(MotionEvent ev) {
         int index = MotionEventCompat.getActionIndex(ev);
         start_value = MotionEventCompat.getY(ev, index);
@@ -131,4 +125,4 @@ public class custom_ViewGroup extends ViewGroup {
             postInvalidate();
         }
     }
-}
+}  

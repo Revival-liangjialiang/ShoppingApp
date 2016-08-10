@@ -38,6 +38,10 @@
             android:theme="@style/NotitleTheme"
             android:windowSoftInputMode="adjustNothing"
             ></activity>
+        <activity android:name=".Activity.test_Activity"
+            android:theme="@style/NotitleTheme"
+            android:windowSoftInputMode="adjustNothing"
+            ></activity>
     </application>
 
 </manifest>
