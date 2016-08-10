@@ -18,8 +18,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.k.shoppingapp.Activity.Baby_Activity;
 import com.example.k.shoppingapp.Activity.Search_Activity;
-import com.example.k.shoppingapp.Activity.test_Activity;
 import com.example.k.shoppingapp.R;
 import com.example.k.shoppingapp.We_Code.CaptureActivity;
 import com.jude.rollviewpager.RollPagerView;
@@ -182,7 +182,7 @@ public class principal_sheet_fragment extends Fragment implements View.OnClickLi
         switch (v.getId()) {
             case 0:
                 Toast.makeText(getActivity(), "1", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getContext(),test_Activity.class));
+                startActivity(new Intent(getContext(),Baby_Activity.class));
                 break;
             case 1:
                 Toast.makeText(getActivity(), "2", Toast.LENGTH_SHORT).show();

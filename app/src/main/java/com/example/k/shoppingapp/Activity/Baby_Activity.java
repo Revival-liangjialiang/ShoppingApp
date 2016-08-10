@@ -23,14 +23,15 @@ public class Baby_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.baby_activity_layout);
+        setContentView(R.layout.test);
         initSystemSetup();
         initView();
     }
 
     private void initView() {
-        viewPager = (ViewPager) findViewById(R.id.baby_activity_viewPager);
-        viewPager.setAdapter(new com.example.k.shoppingapp.Adapter.Baby_Activity_ViewPager_Adapter(getSupportFragmentManager()));
+       viewPager = (ViewPager) findViewById(R.id.baby_activity_viewPager);
+        //
+         viewPager.setAdapter(new com.example.k.shoppingapp.Adapter.Baby_Activity_ViewPager_Adapter(getSupportFragmentManager()));
     }
 
     private void initSystemSetup() {

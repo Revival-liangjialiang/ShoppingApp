@@ -38,7 +38,7 @@
             android:theme="@style/NotitleTheme"
             android:windowSoftInputMode="adjustNothing"
             ></activity>
-        <activity android:name=".Activity.test_Activity"
+        <activity android:name=".Activity.Baby_Activity"
             android:theme="@style/NotitleTheme"
             android:windowSoftInputMode="adjustNothing"
             ></activity>
