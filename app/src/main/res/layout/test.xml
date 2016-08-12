@@ -4,18 +4,20 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-        <com.example.k.shoppingapp.Extend.custom_ViewGroup
+    <com.example.k.shoppingapp.Util.BabyActivityUtil.PullUpToLoadMore
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.example.k.shoppingapp.Util.BabyActivityUtil.MyScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <ScrollView
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+    <com.example.k.shoppingapp.Util.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#9090"
+                android:orientation="vertical"
                 >
-                <com.example.k.shoppingapp.Util.PercentLinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    >
                 <android.support.v4.view.ViewPager
                     android:id="@+id/baby_activity_viewPager"
                     android:layout_width="0dp"
@@ -23,12 +25,17 @@
                     app:layout_widthPercent="100%w"
                     app:layout_heightPercent="100%w"
                     ></android.support.v4.view.ViewPager>
-                </com.example.k.shoppingapp.Util.PercentLinearLayout>
-            </ScrollView>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/darker_gray"
-                ></LinearLayout>
-        </com.example.k.shoppingapp.Extend.custom_ViewGroup>
+            </com.example.k.shoppingapp.Util.PercentLinearLayout>
+                <include layout="@layout/baby_page_indicator_layout"></include>
+            </RelativeLayout>
+        </com.example.k.shoppingapp.Util.BabyActivityUtil.MyScrollView>
+        <com.example.k.shoppingapp.Util.BabyActivityUtil.MyScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#9090"
+            >
+
+        </com.example.k.shoppingapp.Util.BabyActivityUtil.MyScrollView>
+    </com.example.k.shoppingapp.Util.BabyActivityUtil.PullUpToLoadMore>
+    <include layout="@layout/baby_activity_loading_layout"></include>
 </RelativeLayout>

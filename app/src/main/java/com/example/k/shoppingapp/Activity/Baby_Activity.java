@@ -1,25 +1,38 @@
 package com.example.k.shoppingapp.Activity;
 
+import android.annotation.TargetApi;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.example.k.shoppingapp.Adapter.Baby_Activity_ViewPager_Adapter;
 import com.example.k.shoppingapp.Other.SystemBarTintManager;
 import com.example.k.shoppingapp.R;
+import com.victor.loading.book.BookLoading;
+import com.victor.loading.rotate.RotateLoading;
+
 
 /**
  * Created by k on 2016/8/5.
  */
 public class Baby_Activity extends AppCompatActivity {
     ViewPager viewPager;
-
+    ImageView image1, image2;
+    boolean b = true;
+    private RotateLoading rotateLoading;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,9 +42,37 @@ public class Baby_Activity extends AppCompatActivity {
     }
 
     private void initView() {
-       viewPager = (ViewPager) findViewById(R.id.baby_activity_viewPager);
-        //
-         viewPager.setAdapter(new com.example.k.shoppingapp.Adapter.Baby_Activity_ViewPager_Adapter(getSupportFragmentManager()));
+        image1 = (ImageView) findViewById(R.id.image1);
+        image2 = (ImageView) findViewById(R.id.image2);
+        image1.setImageResource(R.mipmap.r);
+        rotateLoading = (RotateLoading) findViewById(R.id.rotateloading);
+        rotateLoading.start();
+        //TODO 加载完毕之后要关闭 rotateLoading.stop();
+        viewPager = (ViewPager) findViewById(R.id.baby_activity_viewPager);
+        viewPager.setAdapter(new Baby_Activity_ViewPager_Adapter(getSupportFragmentManager()));
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+            @Override
+            public void onPageSelected(int position) {
+                if (b) {
+                    image1.setImageResource(R.mipmap.ri_2);
+                    image2.setImageResource(R.mipmap.r);
+                    b = false;
+                } else {
+                    image1.setImageResource(R.mipmap.r);
+                    image2.setImageResource(R.mipmap.ri_2);
+                    b = true;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     private void initSystemSetup() {
@@ -39,13 +80,13 @@ public class Baby_Activity extends AppCompatActivity {
             setTranslucentStatus(true);
             SystemBarTintManager tintManager = new SystemBarTintManager(this);
             tintManager.setStatusBarTintEnabled(true);
-            tintManager.setStatusBarTintResource(R.color.style_gray);// 通知栏颜色
+            tintManager.setStatusBarTintResource(android.R.color.transparent);// 通知栏颜色
         }
         ViewGroup mContentView = (ViewGroup) findViewById(Window.ID_ANDROID_CONTENT);
         View mChildView = mContentView.getChildAt(0);
         if (mChildView != null) {
             //注意不是设置 ContentView 的 FitsSystemWindows, 而是设置 ContentView 的第一个子 View . 使其不为系统 View 预留空间.
-            ViewCompat.setFitsSystemWindows(mChildView, true);
+            ViewCompat.setFitsSystemWindows(mChildView, false);
         }
     }
 
