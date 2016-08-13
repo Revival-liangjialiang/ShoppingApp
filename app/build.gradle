@@ -33,4 +33,5 @@ dependencies {
     compile project(':volley')
     compile project(':lib_1')
     compile project(':extensiblepageindicator')
+    compile 'com.android.support:recyclerview-v7:24.0.0'
 }

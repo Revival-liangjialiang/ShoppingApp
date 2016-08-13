@@ -1,10 +1,8 @@
-package com.example.k.shoppingapp.Util;
+package com.example.k.shoppingapp.Util.BabyActivityUtil;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -13,7 +11,6 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.k.shoppingapp.Activity.Baby_Activity;
-import com.example.k.shoppingapp.Activity.MainActivity;
 import com.example.k.shoppingapp.Adapter.Baby_Activity_ViewPager_Adapter;
 
 /**
@@ -45,7 +42,10 @@ public class Volley_Request {
             requestQueue.add(new ImageRequest(pic_address[a],new Response.Listener<Bitmap>(){
                 @Override
                 public void onResponse(Bitmap response) {
-                    bitmap_array[value] = response;
+                    Bitmap b = response.copy(Bitmap.Config.RGB_565,false);
+                    response.recycle();
+                    bitmap_array[value] = b;
+                    response.recycle();
                    value++;
                     if(value==pic_address.length) {
                         setImage();

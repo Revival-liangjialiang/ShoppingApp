@@ -11,6 +11,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 
@@ -76,6 +77,7 @@ public class ExtensiblePageIndicator extends View implements ViewPager.OnPageCha
         if (attrs != null) {
             TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.ExtensiblePageIndicator, 0, 0);
             circleRadius = (int) a.getDimension(R.styleable.ExtensiblePageIndicator_indicatorRadius, circleRadius);
+            Log.i("yes","------------circleRadius = "+circleRadius);
             circlePadding = (int) a.getDimension(R.styleable.ExtensiblePageIndicator_indicatorPadding, circlePadding);
             inactiveColor = a.getColor(R.styleable.ExtensiblePageIndicator_indicatorInactiveColor, inactiveColor);
             activeColor = a.getColor(R.styleable.ExtensiblePageIndicator_indicatorActiveColor, activeColor);

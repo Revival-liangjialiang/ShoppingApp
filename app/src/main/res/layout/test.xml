@@ -30,12 +30,17 @@
             </RelativeLayout>
         </com.example.k.shoppingapp.Util.BabyActivityUtil.MyScrollView>
         <com.example.k.shoppingapp.Util.BabyActivityUtil.MyScrollView
+            android:id="@+id/ms"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#9090"
             >
-
         </com.example.k.shoppingapp.Util.BabyActivityUtil.MyScrollView>
     </com.example.k.shoppingapp.Util.BabyActivityUtil.PullUpToLoadMore>
     <include layout="@layout/baby_activity_loading_layout"></include>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/baby_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
 </RelativeLayout>
