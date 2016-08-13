@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 <ImageView
+    android:id="@+id/fragment_image"
     android:layout_width="0dp"
     android:layout_height="0dp"
     app:layout_widthPercent="100%w"
     app:layout_heightPercent="100%w"
-    android:src="@mipmap/ty"
     android:scaleType="centerCrop"
     />
 </com.example.k.shoppingapp.Util.PercentLinearLayout>

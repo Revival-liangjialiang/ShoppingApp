@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/relat"
+    android:id="@+id/loading_layout"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#a000">
+
     <com.victor.loading.rotate.RotateLoading
         android:id="@+id/rotateloading"
         android:layout_width="80dp"
@@ -13,6 +14,7 @@
         android:layout_centerInParent="true"
         app:loading_speed="11"
         app:loading_width="5dp" />
+
 <TextView
     android:layout_centerHorizontal="true"
     android:layout_below="@+id/rotateloading"

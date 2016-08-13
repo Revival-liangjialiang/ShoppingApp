@@ -1,10 +1,13 @@
 package com.example.k.shoppingapp.Adapter;
 
 
+import android.graphics.Bitmap;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.View;
 
+import com.example.k.shoppingapp.Activity.MainActivity;
 import com.example.k.shoppingapp.Fragment.Baby_Actibity_ViewPager_Fragment.Fragment_1;
 import com.example.k.shoppingapp.Fragment.Baby_Actibity_ViewPager_Fragment.Fragment_2;
 
@@ -12,31 +15,28 @@ import com.example.k.shoppingapp.Fragment.Baby_Actibity_ViewPager_Fragment.Fragm
  * Created by k on 2016/8/5.
  */
 public class Baby_Activity_ViewPager_Adapter extends FragmentPagerAdapter{
-    public Baby_Activity_ViewPager_Adapter(FragmentManager fm) {
+    Bitmap[] bitmap = new Bitmap[10];
+    int a = 0;
+    MainActivity m;
+    public Baby_Activity_ViewPager_Adapter(FragmentManager fm,Bitmap[] b)
+    {
         super(fm);
+        bitmap = b;
+        for(int c = 0;c<10;c++){
+            if(bitmap[c]!=null){
+                a++;
+            }
+        }
     }
 
-    /**
-     * Return the Fragment associated with a specified position.
-     *
-     * @param position
-     */
     @Override
     public Fragment getItem(int position) {
-        switch (position){
-            case 0:
-            return new Fragment_1();
-            case 1:
-                return new Fragment_2();
-        }
-        return null;
+            return new Fragment_1(bitmap[position]);
     }
 
-    /**
-     * Return the number of views available.
-     */
     @Override
     public int getCount() {
-        return 2;
+        return a;
     }
+
 }

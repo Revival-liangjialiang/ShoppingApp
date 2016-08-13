@@ -31,5 +31,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
     compile files('libs/zxing.jar')
     compile project(':volley')
-    compile project(':lib')
+    compile project(':lib_1')
+    compile project(':extensiblepageindicator')
 }
