@@ -1,15 +1,23 @@
 package com.example.k.shoppingapp.Activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.k.shoppingapp.Adapter.MyFragmentPagerAdapter;
@@ -24,8 +32,11 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    //广播接收机字段
+    private IntentFilter intentfilter;// IntentFilter：意图过滤器。
+    private NetworkChangeReceier networkchangereceier;
+    LinearLayout listener_network_layout;
 
-    int b;
     public ViewPager viewPager;
     int a;
     my_account_fragment w;
@@ -41,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_layout);
         initViewPager();
         initCommonTabLayout();
+        setBroadcastReceiver();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             setTranslucentStatus(true);
             SystemBarTintManager tintManager = new SystemBarTintManager(this);
@@ -152,6 +164,37 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
-
-
+    private void setBroadcastReceiver() {
+        listener_network_layout = (LinearLayout)findViewById(R.id.listener_network_layout);
+        intentfilter = new IntentFilter();
+        intentfilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");// 想监听什么广播在这修改值即可。
+        networkchangereceier = new NetworkChangeReceier();
+        registerReceiver(networkchangereceier, intentfilter);
+        listener_network_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(android.provider.Settings.ACTION_SETTINGS);
+                startActivity(intent);
+            }
+        });
+    }
+    class NetworkChangeReceier extends BroadcastReceiver {// BroadcastReceiver：广播接收机。
+        @Override
+        public void onReceive(Context context, Intent intent) {// 网络发生变化时就会调用这个方法。
+            ConnectivityManager connectivitymanager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);// ConnectivityManager:连接管理器。
+            NetworkInfo networkinfo = connectivitymanager
+                    .getActiveNetworkInfo(); // NetworkInfo：网络状态。
+            if (networkinfo != null && networkinfo.isAvailable()) {// isAvailable：是可用的，若连接则返回true。
+                listener_network_layout.setVisibility(View.GONE);
+            } else {
+                listener_network_layout.setVisibility(View.VISIBLE);
+                Log.i("ok","断网！");
+            }
+        }
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(networkchangereceier);
+    }
 }

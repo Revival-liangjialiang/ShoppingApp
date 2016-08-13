@@ -1,6 +1,12 @@
 package com.example.k.shoppingapp.Activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,7 +20,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.k.shoppingapp.Adapter.BabyActivity_RecyclerViewAdapter;
 import com.example.k.shoppingapp.Extend.Baby_Activity_Extend.FullyLinearLayoutManager;
@@ -47,7 +55,6 @@ public class Baby_Activity extends AppCompatActivity {
     //得到本进程的最大可用内存
     int maxCacheSize;
     int value = 0;
-    MyScrollView myScroolView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,6 +66,8 @@ public class Baby_Activity extends AppCompatActivity {
         //启动宝贝活动的图片请求
         startRequest();
     }
+
+
 
     private void setLruCache() {
         maxCacheSize = (int) Runtime.getRuntime().maxMemory();
@@ -90,7 +99,6 @@ public class Baby_Activity extends AppCompatActivity {
 
     private void initView() {
         recyclerView = (RecyclerView) findViewById(R.id.baby_recyclerView);
-        Log.i("ok", "-------------===============" + recyclerView);
         loading_layout = (RelativeLayout) findViewById(R.id.loading_layout);
         rotateLoading = (RotateLoading) findViewById(R.id.rotateloading);
         rotateLoading.start();
@@ -129,4 +137,7 @@ public class Baby_Activity extends AppCompatActivity {
         }
         win.setAttributes(winParams);
     }
+    //监听网络变化
+
+
 }

@@ -12,5 +12,6 @@
     <color name="search_frame_style_color">#27304F</color>
     <color name="History_record_button_color">#BBC1CD</color>
     <color name="kit">#1AAF5D</color>
+    <color name="Listener_network_layout_color">#FFFA9C</color>
 
 </resources>
