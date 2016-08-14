@@ -13,5 +13,5 @@
     <color name="History_record_button_color">#BBC1CD</color>
     <color name="kit">#1AAF5D</color>
     <color name="Listener_network_layout_color">#FFFA9C</color>
-
+    <color name="title_color">#ABB2C2</color>
 </resources>

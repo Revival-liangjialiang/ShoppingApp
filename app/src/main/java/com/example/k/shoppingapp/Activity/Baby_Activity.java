@@ -55,16 +55,23 @@ public class Baby_Activity extends AppCompatActivity {
     //得到本进程的最大可用内存
     int maxCacheSize;
     int value = 0;
+    int head_pic_path_value = 0;
+    int details_pic_address_value = 0;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test);
+        setContentView(R.layout.baby_activity_main_layout);
+        Intent intent = getIntent();
+        head_pic_path_value = intent.getIntExtra("value",0);
+        details_pic_address_value = intent.getIntExtra("value_2",0);
         initSystemSetup();
         initView();
         setLruCache();
         //启动宝贝活动的图片请求
         startRequest();
+
     }
 
 
@@ -82,15 +89,15 @@ public class Baby_Activity extends AppCompatActivity {
     }
 
     private void startRequest() {
-        new Volley_Request(pic_path.baby_hrad_pic_address, this).StartImageRequest();
-        Volley_DetailsPageRequest v = new Volley_DetailsPageRequest(this, pic_path.details_page_pic_address);
+        new Volley_Request(pic_path.baby_hrad_pic_address[head_pic_path_value], this).StartImageRequest();
+        Volley_DetailsPageRequest v = new Volley_DetailsPageRequest(this, pic_path.details_page_pic_address[details_pic_address_value]);
         v.setRequestListener(new RequestListener() {
             @Override
             public void getImage(Bitmap bitmap) {
-                cache.put(pic_path.details_page_pic_address[value], bitmap);
+                cache.put(pic_path.details_page_pic_address[details_pic_address_value][value], bitmap);
                 value++;
-                if (value == pic_path.details_page_pic_address.length) {
-                    recyclerView.setAdapter(new BabyActivity_RecyclerViewAdapter(Baby_Activity.this, pic_path.details_page_pic_address));
+                if (value == pic_path.details_page_pic_address[details_pic_address_value].length) {
+                    recyclerView.setAdapter(new BabyActivity_RecyclerViewAdapter(Baby_Activity.this, pic_path.details_page_pic_address[details_pic_address_value]));
                 }
             }
         });
