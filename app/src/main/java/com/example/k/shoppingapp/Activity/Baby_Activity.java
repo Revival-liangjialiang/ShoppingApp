@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 
 import com.example.k.shoppingapp.Adapter.BabyActivity_RecyclerViewAdapter;
 import com.example.k.shoppingapp.Extend.Baby_Activity_Extend.FullyLinearLayoutManager;
+import com.example.k.shoppingapp.Other.MyView;
 import com.example.k.shoppingapp.Other.SystemBarTintManager;
 import com.example.k.shoppingapp.Other.pic_path;
 import com.example.k.shoppingapp.R;
@@ -44,6 +46,7 @@ import java.util.HashMap;
  * Created by k on 2016/8/5.
  */
 public class Baby_Activity extends AppCompatActivity {
+    private MyView myView;
     public ViewPager viewPager;
     public RecyclerView recyclerView;
     public RelativeLayout loading_layout;
@@ -105,6 +108,7 @@ public class Baby_Activity extends AppCompatActivity {
     }
 
     private void initView() {
+         myView = (MyView)findViewById(R.id.baby_user);
         recyclerView = (RecyclerView) findViewById(R.id.baby_recyclerView);
         loading_layout = (RelativeLayout) findViewById(R.id.loading_layout);
         rotateLoading = (RotateLoading) findViewById(R.id.rotateloading);
@@ -116,6 +120,8 @@ public class Baby_Activity extends AppCompatActivity {
         recyclerView.setNestedScrollingEnabled(false);
         //设置布局管理器
         recyclerView.setLayoutManager(linearLayoutManager);
+        myView.bitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.user);
+        myView.postInvalidate();
     }
 
     private void initSystemSetup() {

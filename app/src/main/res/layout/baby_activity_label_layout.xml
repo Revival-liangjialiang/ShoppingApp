@@ -1,231 +1,598 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_below="@+id/baby_percent_layout"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<TextView
-    android:id="@+id/baby_tiele"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginRight="30dp"
-    />
+    android:layout_height="match_parent"
+    android:layout_below="@+id/baby_percent_layout"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/baby_tiele"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="30dp" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="￥158"
             android:textColor="@color/titlec"
-            android:textSize="25sp"
-            />
+            android:textSize="25sp" />
+
         <TextView
-            android:layout_marginLeft="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="10dp"
-            android:text="夏季抢新价"
+            android:layout_marginLeft="12dp"
             android:background="@color/titlec"
+            android:text="夏季抢新价"
             android:textColor="@android:color/white"
-            />
+            android:textSize="10dp" />
     </LinearLayout>
+
     <LinearLayout
-        android:layout_marginLeft="7dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:layout_marginLeft="7dp"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="价格"
-            android:textSize="12dp"
             android:textColor="@color/title_color"
-            />
+            android:textSize="12dp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="11dp"
             android:background="@mipmap/line"
             android:text="￥268"
             android:textColor="@color/title_color"
-            />
+            android:textSize="11dp" />
     </LinearLayout>
+
     <LinearLayout
-        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
         <TextView
-            android:layout_marginLeft="7dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
             android:layout_weight="1"
-            android:textSize="12dp"
             android:gravity="left"
             android:text="快递:免运费"
             android:textColor="@color/title_color"
-            />
+            android:textSize="12dp" />
+
         <TextView
-            android:gravity="center"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="12dp"
+            android:gravity="center"
             android:text="月销:2993笔"
             android:textColor="@color/title_color"
-            />
+            android:textSize="12dp" />
+
         <TextView
-            android:layout_marginRight="7dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginRight="7dp"
             android:layout_weight="1"
-            android:textSize="12dp"
-            android:text="广东广州"
             android:gravity="right"
+            android:text="广东广州"
             android:textColor="@color/title_color"
-            />
+            android:textSize="12dp" />
     </LinearLayout>
+
     <LinearLayout
-        android:layout_marginTop="3dp"
-        android:paddingTop="7dp"
-        android:paddingBottom="7dp"
-        android:background="#ECF0F3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:background="#ECF0F3"
         android:orientation="horizontal"
-        >
+        android:paddingBottom="7dp"
+        android:paddingTop="7dp">
+
         <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="7dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/tick"
-            />
+            android:src="@drawable/tick" />
+
         <TextView
-            android:layout_marginLeft="2dp"
-            android:textSize="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
             android:text="卖家承诺15天内发货"
-            />
+            android:textSize="12dp" />
+
         <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="29dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/tick"
-            />
+            android:src="@drawable/tick" />
+
         <TextView
-            android:layout_marginLeft="2dp"
-            android:textSize="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
             android:text="8天退换"
-            />
+            android:textSize="12dp" />
     </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="10dp"
+        android:background="@color/style_gray" />
+
+    <LinearLayout
+        android:id="@+id/baby_select_size_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="6dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="left"
+            android:text="选择尺码,颜色分类" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:src="@drawable/left_arrow" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/style_gray" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="8dp"
+        android:text="宝贝评价(3022)"
+        android:textSize="12dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/evaluate_style_background"
+            android:text="衣服不错(300)"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/evaluate_style_background"
+            android:text="版型漂亮(176)"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/evaluate_style_background"
+            android:text="穿着效果好(124)"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/evaluate_style_background"
+            android:text="大小合适(106)"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/evaluate_style_background"
+            android:text="衣服很舒服(98)"
+            android:textSize="12sp" />
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/evaluate_style_background"
+            android:text="颜色很正(87)"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.example.k.shoppingapp.Other.MyView
+            android:id="@+id/baby_user"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="clip_vertical"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="3dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="3dp"
+            android:text="t**4" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="3dp"
+            android:text="2016-8-14"
+            android:textColor="@color/title_color"
+            android:textSize="9dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:text="质量还是不错的！物超所值！"
+            android:textColor="@color/title_color"
+            android:textSize="12dp" />
+    </LinearLayout>
+    <TextView
+        android:background="@drawable/baby_see_more_background"
+        android:textColor="@color/titlec"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="查看更多评价"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
         android:background="@color/style_gray"
         />
     <LinearLayout
-        android:id="@+id/baby_select_size_layout"
+        android:padding="7dp"
         android:orientation="horizontal"
-        android:padding="6dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="问大家(83)"
+        />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/left_arrow"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:padding="7dp"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
             android:layout_gravity="center_vertical"
+            android:textColor="@color/titlec"
+            android:paddingBottom="1dp"
+            android:paddingTop="1dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:textSize="10dp"
             android:layout_width="wrap_content"
-            android:gravity="left"
             android:layout_height="wrap_content"
-            android:text="选择尺码,颜色分类"
+            android:text="问"
+            android:background="@drawable/baby_ask_background"
             />
         <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content" />
-        <ImageView
+            android:layout_marginLeft="2dp"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:text="料子如何"
+            />
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:gravity="right"
-            android:src="@drawable/left_arrow"
-            android:layout_height="wrap_content" />
+            android:text="6个回答"
+            android:textSize="12dp"
+            android:textColor="@color/title_color"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:padding="7dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/titlec"
+            android:paddingBottom="1dp"
+            android:paddingTop="1dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:textSize="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="问"
+            android:background="@drawable/baby_ask_background"
+            />
+        <TextView
+            android:layout_marginLeft="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:text="质量怎么样"
+            />
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="7个回答"
+            android:textSize="12dp"
+            android:textColor="@color/title_color"
+            />
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:background="@color/style_gray"
+        android:background="@color/style_gray" />
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_margin="7dp"
+        android:background="@drawable/jin_background"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/jin"
         />
     <TextView
-        android:layout_marginLeft="7dp"
-        android:layout_marginTop="8dp"
+        android:layout_gravity="center_vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="10dp"
-        android:text="宝贝评价(3022)"
+        android:text="金利来旗舰店"
         />
+</LinearLayout>
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:orientation="horizontal"
-        >
-        <TextView
-            android:textSize="12sp"
-            android:layout_margin="5dp"
-            android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="衣服不错(300)"
-            android:background="@drawable/evaluate_style_background"
-            />
-        <TextView
-            android:textSize="12sp"
-            android:layout_margin="5dp"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="13"
+                />
+            <TextView
+                android:gravity="center"
+                android:textColor="@color/title_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="全部宝贝"
+                />
+        </LinearLayout>
+        <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="版型漂亮(176)"
-            android:background="@drawable/evaluate_style_background"
+            android:layout_height="match_parent"
+            android:src="@mipmap/v"
             />
-        <TextView
-            android:textSize="12sp"
-            android:layout_margin="5dp"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1.0万"
+                />
+            <TextView
+                android:gravity="center"
+                android:textColor="@color/title_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="关注人数"
+                />
+        </LinearLayout>
+        <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="穿着效果好(124)"
-            android:background="@drawable/evaluate_style_background"
+            android:layout_height="match_parent"
+            android:src="@mipmap/v"
             />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_marginBottom="1dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:textSize="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="宝贝描述"
+                    />
+                <TextView
+                    android:textColor="@color/titlec"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:textSize="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4.8"
+                    />
+                <TextView
+                    android:paddingLeft="1dp"
+                    android:paddingRight="1dp"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/grade_background"
+                    android:textSize="9dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="高"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginBottom="1dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:textSize="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="卖家服务"
+                    />
+                <TextView
+                    android:textColor="@color/titlec"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:textSize="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4.9"
+                    />
+                <TextView
+                    android:paddingLeft="1dp"
+                    android:paddingRight="1dp"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/grade_background"
+                    android:textSize="9dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="高"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:textSize="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="物流服务"
+                    />
+                <TextView
+                    android:textColor="@color/titlec"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:textSize="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4.8"
+                    />
+                <TextView
+                    android:paddingLeft="1dp"
+                    android:paddingRight="1dp"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/grade_background"
+                    android:textSize="9dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="高"
+                    />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_height="100dp"
+        android:background="@color/style_gray"
+        android:orientation="vertical"
         >
-        <TextView
-            android:textSize="12sp"
-            android:layout_margin="5dp"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_margin="20dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="大小合适(106)"
-            android:background="@drawable/evaluate_style_background"
-            />
-        <TextView
-            android:textSize="12sp"
-            android:layout_margin="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="衣服很舒服(98)"
-            android:background="@drawable/evaluate_style_background"
-            />
-        <TextView
-            android:textSize="12sp"
-            android:layout_margin="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="颜色很正(87)"
-            android:background="@drawable/evaluate_style_background"
-            />
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/black_line"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="2dp" />
+            <TextView
+                android:gravity="center"
+                android:text="继续拖动,查看图片详情"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/black_line"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="2dp" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
