@@ -5,6 +5,7 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 
 /**
  * Created by k on 2016/8/15.
@@ -21,7 +22,6 @@ public class customViewPager extends ViewPager{
         b = false;
         return b;
     }
-
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         return super.dispatchTouchEvent(ev);

@@ -9,6 +9,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 
+import com.example.k.shoppingapp.Util.reValue;
+
 /**
  * Created by k on 2016/8/15.
  */
@@ -21,20 +23,19 @@ public class customRecyclerView extends RecyclerView {
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
-        Log.i("ok", "被执行");
         linearLayoutManager = (LinearLayoutManager) getLayoutManager();
         super.onTouchEvent(e);
         switch (MotionEventCompat.getActionMasked(e)) {
             case MotionEvent.ACTION_MOVE:
+                reValue.re_value = linearLayoutManager.findFirstCompletelyVisibleItemPosition();
                 if (linearLayoutManager.findFirstCompletelyVisibleItemPosition() == 0) {
-                    Log.i("ok", "返回false");
                     b = false;
                 } else {
-                    Log.i("ok", "返回true");
                     b = true;
                 }
                 break;
             case MotionEvent.ACTION_DOWN:
+                reValue.re_value = 1;
                 b = true;
                 break;
             case MotionEvent.ACTION_UP:

@@ -10,6 +10,8 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.Scroller;
 
+import com.example.k.shoppingapp.Util.reValue;
+
 /**
  * Created by baoyunlong on 16/6/8.
  */
@@ -110,15 +112,20 @@ public class PullUpToLoadMore extends ViewGroup {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (reValue.re_value == 0) {
+            bottomScrollVIewIsInTop = true;
+        } else {
+            bottomScrollVIewIsInTop = false;
+        }
         //防止子View禁止父view拦截事件
         this.requestDisallowInterceptTouchEvent(false);
+        Log.i("ok","------PullUpToLoadMore的分发事件！------reValue.re_value = "+reValue.re_value);
         return super.dispatchTouchEvent(ev);
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         int y = (int) ev.getY();
-
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 lastY = y;
@@ -139,7 +146,6 @@ public class PullUpToLoadMore extends ViewGroup {
 
                 if (bottomScrollVIewIsInTop) {
                     int dy = lastY - y;
-
                     //判断是否是向下滑动和是否在第二屏
                     if (dy < 0 && currPosition == 1) {
                         if (Math.abs(dy) >= scaledTouchSlop) {
@@ -150,7 +156,7 @@ public class PullUpToLoadMore extends ViewGroup {
 
                 break;
         }
-        return isIntercept;
+       return isIntercept;
     }
 
     @Override
