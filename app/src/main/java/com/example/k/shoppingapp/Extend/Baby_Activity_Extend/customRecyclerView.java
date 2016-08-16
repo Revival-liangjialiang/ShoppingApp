@@ -14,6 +14,7 @@ import com.example.k.shoppingapp.Util.reValue;
 /**
  * Created by k on 2016/8/15.
  */
+//TODO 为兼容多个嵌套而定义
 public class customRecyclerView extends RecyclerView {
     LinearLayoutManager linearLayoutManager;
     boolean b = true;
@@ -42,7 +43,6 @@ public class customRecyclerView extends RecyclerView {
                 break;
             default:break;
         }
-        Log.i("ok",">>>>>>>>>>"+b);
         return b;
     }
     @Override

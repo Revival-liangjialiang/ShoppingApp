@@ -56,12 +56,12 @@
                     tl:tl_textsize="14sp"
                     tl:tl_underline_color="#DDDDDD"
                     tl:tl_underline_height="1dp" />
-                <com.example.k.shoppingapp.Extend.Baby_Activity_Extend.customViewPager
+                <android.support.v4.view.ViewPager
                     android:layout_below="@+id/baby_activity_tab"
                     android:id="@+id/baby_activity_viewPager_2"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                </com.example.k.shoppingapp.Extend.Baby_Activity_Extend.customViewPager>
+                    android:layout_height="match_parent"
+                />
             </RelativeLayout>
         </com.example.k.shoppingapp.Util.BabyActivityUtil.MyScrollView>
     </com.example.k.shoppingapp.Util.BabyActivityUtil.PullUpToLoadMore>

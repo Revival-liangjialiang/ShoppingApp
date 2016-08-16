@@ -1,6 +1,7 @@
 package com.example.k.shoppingapp.Util.BabyActivityUtil;
 
 import android.content.Context;
+import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -21,6 +22,11 @@ public class PullUpToLoadMore extends ViewGroup {
     MyScrollView topScrollView, bottomScrollView;
     VelocityTracker velocityTracker = VelocityTracker.obtain();
     Scroller scroller = new Scroller(getContext());
+    //TODO------Revival-------处理横切不处理上拉事件
+    float valueX = 0;
+    float X = 0;
+    float valueY = 0;
+    float Y = 0;
 
     int currPosition = 0;
     int position1Y;
@@ -102,9 +108,7 @@ public class PullUpToLoadMore extends ViewGroup {
 
                     }
                 });
-
                 position1Y = topScrollView.getBottom();
-
                 scaledTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
             }
         });
@@ -112,14 +116,41 @@ public class PullUpToLoadMore extends ViewGroup {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (reValue.re_value == 0) {
-            bottomScrollVIewIsInTop = true;
-        } else {
-            bottomScrollVIewIsInTop = false;
+        switch (MotionEventCompat.getActionMasked(ev)){
+            case MotionEvent.ACTION_DOWN:
+                valueX = ev.getX();
+                valueY = ev.getY();
+                break;
+            case MotionEvent.ACTION_UP:
+                valueX = 0f;
+                X = 0;
+                valueY = 0f;
+                Y = 0;
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if(valueX>ev.getX()){
+                    X=valueX-ev.getX();
+                }else{
+                    X = ev.getX()-valueX;
+                }
+                if(valueY>ev.getY()){
+                    Y=valueY-ev.getY();
+                }else{
+                    Y = ev.getY()-valueY;
+                }
+                break;
+            default:break;
+        }
+        //TODO------Revival-------为了兼容多层嵌套实现可上拉操作！
+        if(X+2<Y) {
+            if (reValue.re_value == 0) {
+                bottomScrollVIewIsInTop = true;
+            } else {
+                bottomScrollVIewIsInTop = false;
+            }
         }
         //防止子View禁止父view拦截事件
         this.requestDisallowInterceptTouchEvent(false);
-        Log.i("ok","------PullUpToLoadMore的分发事件！------reValue.re_value = "+reValue.re_value);
         return super.dispatchTouchEvent(ev);
     }
 
@@ -137,9 +168,12 @@ public class PullUpToLoadMore extends ViewGroup {
 
                     //判断是否是向上滑动和是否在第一屏
                     if (dy > 0 && currPosition == 0) {
-                        if (dy >= scaledTouchSlop) {
-                            isIntercept = true;//拦截事件
-                            lastY=y;
+                        //TODO------Revival-------处理横切不处理上拉事件
+                        if(X+2<Y) {
+                            if (dy >= scaledTouchSlop) {
+                                isIntercept = true;//拦截事件
+                                lastY = y;
+                            }
                         }
                     }
                 }
