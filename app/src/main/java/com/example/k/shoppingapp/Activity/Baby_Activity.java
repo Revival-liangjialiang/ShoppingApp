@@ -1,13 +1,8 @@
 package com.example.k.shoppingapp.Activity;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,31 +10,20 @@ import android.support.v4.util.LruCache;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.k.shoppingapp.Adapter.BabyActivity_RecyclerViewAdapter;
 import com.example.k.shoppingapp.Adapter.Baby_Activity_ViewPager_2_Adapter;
-import com.example.k.shoppingapp.Extend.Baby_Activity_Extend.FullyLinearLayoutManager;
 import com.example.k.shoppingapp.Other.MyView;
 import com.example.k.shoppingapp.Other.SquareBlockView;
 import com.example.k.shoppingapp.Other.SystemBarTintManager;
 import com.example.k.shoppingapp.Other.Title_address;
-import com.example.k.shoppingapp.Other.pic_path;
 import com.example.k.shoppingapp.R;
 import com.example.k.shoppingapp.Util.BabyActivityUtil.ImageSize;
-import com.example.k.shoppingapp.Util.BabyActivityUtil.MyScrollView;
-import com.example.k.shoppingapp.Util.BabyActivityUtil.RequestListener;
-import com.example.k.shoppingapp.Util.BabyActivityUtil.Volley_DetailsPageRequest;
-import com.example.k.shoppingapp.Util.BabyActivityUtil.Volley_Request;
 import com.example.k.shoppingapp.Util.TabEntity;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
@@ -57,7 +41,7 @@ import java.util.HashMap;
 public class Baby_Activity extends AppCompatActivity {
     private CommonTabLayout tab;
     ArrayList<CustomTabEntity> list = new ArrayList<>();
-    String title[] = {"图片详情","产品参数", "店铺推荐"};
+    String title[] = {"图片详情", "产品参数", "店铺推荐"};
 
     SquareBlockView squareBlockView;
     TextView baby_tiele;
@@ -68,20 +52,21 @@ public class Baby_Activity extends AppCompatActivity {
     public RotateLoading rotateLoading;
     public ExtensiblePageIndicator extensiblePageIndicator;
     public LruCache<String, Bitmap> cache;
-    public HashMap<String,ImageSize> imageSizeHashMap = new HashMap<>();
+    public HashMap<String, ImageSize> imageSizeHashMap = new HashMap<>();
     //得到本进程的最大可用内存
     int maxCacheSize;
     public int head_pic_path_value = 0;
     public int details_pic_address_value = 0;
     public int title_address_offset_value = 0;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.baby_activity_main_layout);
         Intent intent = getIntent();
-        head_pic_path_value = intent.getIntExtra("value",0);
-        details_pic_address_value = intent.getIntExtra("value_2",0);
-        title_address_offset_value = intent.getIntExtra("value_3",0);
+        head_pic_path_value = intent.getIntExtra("value", 0);
+        details_pic_address_value = intent.getIntExtra("value_2", 0);
+        title_address_offset_value = intent.getIntExtra("value_3", 0);
         initSystemSetup();
         initView();
         setLruCache();
@@ -89,14 +74,14 @@ public class Baby_Activity extends AppCompatActivity {
     }
 
     private void initTabArrayListData() {
-        for(int a = 0;a<title.length;a++){
+        for (int a = 0; a < title.length; a++) {
             list.add(new TabEntity(title[a], 0, 0));
         }
         tab.setTabData(list);
         tab.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
-                //TODO
+                viewPager_2.setCurrentItem(position);
             }
 
             @Override
@@ -121,22 +106,38 @@ public class Baby_Activity extends AppCompatActivity {
 
     private void initView() {
         //TODO
-        viewPager_2 = (ViewPager)findViewById(R.id.baby_activity_viewPager_2);
+        viewPager_2 = (ViewPager) findViewById(R.id.baby_activity_viewPager_2);
         viewPager_2.setAdapter(new Baby_Activity_ViewPager_2_Adapter(getSupportFragmentManager()));
         //viewPager_2.setOffscreenPageLimit(3);
         tab = (CommonTabLayout) findViewById(R.id.baby_activity_tab);
-        squareBlockView = (SquareBlockView)findViewById(R.id.sss);
-        squareBlockView.bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.jin);
+        viewPager_2.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                tab.setCurrentTab(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        squareBlockView = (SquareBlockView) findViewById(R.id.sss);
+        squareBlockView.bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.jin);
         squareBlockView.postInvalidate();
-        baby_tiele = (TextView)findViewById(R.id.baby_tiele);
+        baby_tiele = (TextView) findViewById(R.id.baby_tiele);
         baby_tiele.setText(Title_address.title[title_address_offset_value]);
-         myView = (MyView)findViewById(R.id.baby_user);
+        myView = (MyView) findViewById(R.id.baby_user);
         loading_layout = (RelativeLayout) findViewById(R.id.loading_layout);
         rotateLoading = (RotateLoading) findViewById(R.id.rotateloading);
         rotateLoading.start();
         viewPager = (ViewPager) findViewById(R.id.baby_activity_viewPager);
         extensiblePageIndicator = (ExtensiblePageIndicator) findViewById(R.id.flexibleIndicator);
-        myView.bitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.user);
+        myView.bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.user);
         myView.postInvalidate();
     }
 

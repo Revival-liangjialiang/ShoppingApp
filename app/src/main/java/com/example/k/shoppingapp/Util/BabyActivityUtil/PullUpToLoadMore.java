@@ -141,14 +141,11 @@ public class PullUpToLoadMore extends ViewGroup {
                 break;
             default:break;
         }
-        //TODO------Revival-------为了兼容多层嵌套实现可上拉操作！
-        if(X+2<Y) {
             if (reValue.re_value == 0) {
                 bottomScrollVIewIsInTop = true;
             } else {
                 bottomScrollVIewIsInTop = false;
             }
-        }
         //防止子View禁止父view拦截事件
         this.requestDisallowInterceptTouchEvent(false);
         return super.dispatchTouchEvent(ev);
@@ -168,13 +165,10 @@ public class PullUpToLoadMore extends ViewGroup {
 
                     //判断是否是向上滑动和是否在第一屏
                     if (dy > 0 && currPosition == 0) {
-                        //TODO------Revival-------处理横切不处理上拉事件
-                        if(X+2<Y) {
                             if (dy >= scaledTouchSlop) {
                                 isIntercept = true;//拦截事件
                                 lastY = y;
                             }
-                        }
                     }
                 }
 
@@ -183,7 +177,10 @@ public class PullUpToLoadMore extends ViewGroup {
                     //判断是否是向下滑动和是否在第二屏
                     if (dy < 0 && currPosition == 1) {
                         if (Math.abs(dy) >= scaledTouchSlop) {
-                            isIntercept = true;
+                            //TODO Revival 纵向滑动才可进入
+                            if(X+2<Y) {
+                                isIntercept = true;
+                            }
                         }
                     }
                 }

@@ -37,7 +37,6 @@
             android:id="@+id/ms"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#9090"
             >
             <RelativeLayout
                 android:layout_width="match_parent"

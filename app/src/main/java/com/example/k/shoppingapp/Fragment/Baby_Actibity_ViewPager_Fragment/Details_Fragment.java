@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.k.shoppingapp.Activity.Baby_Activity;
-import com.example.k.shoppingapp.Adapter.BabyActivity_RecyclerViewAdapter;
+import com.example.k.shoppingapp.Adapter.BabyActivity_Details_RecyclerViewAdapter;
 import com.example.k.shoppingapp.Extend.Baby_Activity_Extend.FullyLinearLayoutManager;
 import com.example.k.shoppingapp.Other.pic_path;
 import com.example.k.shoppingapp.R;
@@ -67,7 +66,7 @@ public class Details_Fragment extends Fragment {
                 b.cache.put(pic_path.details_page_pic_address[b.details_pic_address_value][value], bitmap);
                 value++;
                 if (value == pic_path.details_page_pic_address[b.details_pic_address_value].length) {
-                    recyclerView.setAdapter(new BabyActivity_RecyclerViewAdapter(b, pic_path.details_page_pic_address[b.details_pic_address_value]));
+                    recyclerView.setAdapter(new BabyActivity_Details_RecyclerViewAdapter(b, pic_path.details_page_pic_address[b.details_pic_address_value]));
                 value=0;
                 }
             }

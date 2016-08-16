@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.k.shoppingapp.Util.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<ImageView
+    android:src="@mipmap/ic_launcher"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    app:layout_widthPercent="100%w"
+    app:layout_heightPercent="100%w"
+    />
+    <TextView
+        android:text="标题"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="39"
+            />
+        <TextView
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="477人付款"
+            />
+    </RelativeLayout>
+</com.example.k.shoppingapp.Util.PercentLinearLayout>
