@@ -181,15 +181,19 @@ public class principal_sheet_fragment extends Fragment implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case 0:
+                //轮播图第一张
                 Intent intent_0 = new Intent(getContext(),Baby_Activity.class);
                 intent_0.putExtra("value",0);
                 intent_0.putExtra("value_2",0);
+                intent_0.putExtra("value_3",0);
                 startActivity(intent_0);
                 break;
             case 1:
+                //轮播图第二张
                 Intent intent_1 = new Intent(getContext(),Baby_Activity.class);
                 intent_1.putExtra("value",1);
                 intent_1.putExtra("value_2",1);
+                intent_1.putExtra("value_3",1);
                 startActivity(intent_1);
                 break;
             case 2:

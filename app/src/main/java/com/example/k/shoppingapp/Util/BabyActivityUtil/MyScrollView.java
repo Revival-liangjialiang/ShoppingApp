@@ -32,7 +32,7 @@ public class MyScrollView extends ScrollView {
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-
+        Log.i("ok","MyScrollView()类的onTouchEvent()方法被调用！");
         switch (ev.getAction()){
             case MotionEvent.ACTION_MOVE:
 

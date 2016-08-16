@@ -1,8 +1,5 @@
 package com.example.k.shoppingapp.Other;
 
-/**
- * Created by k on 2016/7/26.
- */
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,18 +15,18 @@ import com.example.k.shoppingapp.R;
 import com.example.k.shoppingapp.Util.Adaptation;
 
 /**
- * Created by k on 2016/6/7.
+ * Created by k on 2016/8/14.
  */
-public class MyView extends View {
-    Context context;
+public class SquareBlockView extends View {
     int mHeight = 0,mWidth = 0;
     public Bitmap bitmap = null;
-    public MyView(Context context, AttributeSet attrs) {
+    Context context;
+    public SquareBlockView(Context context, AttributeSet attrs) {
         super(context, attrs);
-       this.context = context;
         bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ok);
+        this.context = context;
     }
-    public MyView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public SquareBlockView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -47,8 +44,9 @@ public class MyView extends View {
         int min = Math.min(mWidth, mHeight);
         /**
          * 长度如果不一致，按小的值进行压缩
+         * Adaptation.dp2px(context,1)进行适配
          */
-        bitmap = Bitmap.createScaledBitmap(bitmap, min, min, false);
+        bitmap = Bitmap.createScaledBitmap(bitmap, min-Adaptation.dp2px(context,1), min-Adaptation.dp2px(context,1), false);
         canvas.drawBitmap(createCircleImage(bitmap, min), 0, 0, null);
     }
     //************************************************************************************************
@@ -86,34 +84,23 @@ public class MyView extends View {
     private Bitmap createCircleImage(Bitmap source, int min)
     {
         final Paint paint = new Paint();
-        final Paint paint1 = new Paint();
-        final Paint paint2 = new Paint();
         paint.setAntiAlias(true);
-        paint1.setAntiAlias(true);
-        paint2.setAntiAlias(true);
-        paint2.setColor(Color.parseColor("#886C9C"));
-        Bitmap target = Bitmap.createBitmap(min, min, Bitmap.Config.ARGB_8888);
-        Bitmap target1 = Bitmap.createBitmap(min,min,Bitmap.Config.ARGB_8888);
-        /**
-         * 产生一个同样大小的画布
-         */
-        Canvas canvas = new Canvas(target);
-        Canvas canvas1 = new Canvas(target1);
-        /**
-         * 首先绘制圆形
-         */
-        canvas.drawCircle(min / 2, min / 2, min / 2- Adaptation.dp2px(context,1)/2, paint);
-        canvas1.drawCircle(min/2,min/2,min/2,paint2);
-        /**
-         * 使用SRC_IN模式显示后画图的交集处
-         */
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        paint1.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER));
+        //设置画矩形的笔的颜色
+        paint.setColor(Color.parseColor("#0C0C0C"));
+        //设置画矩形的笔为实心笔
+        paint.setStyle(Paint.Style.FILL);
+        Bitmap bitmap = Bitmap.createBitmap(min, min, Bitmap.Config.ARGB_8888);
+       //canvas上的操作都会应在bitmap上
+        Canvas canvas = new Canvas(bitmap);
+       //画一个矩形
+    canvas.drawRect(0,0,min,min,paint);
+      //设置为重叠模式，下面的将被上面的挡住一些部分或者全部
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER));
         /**
          * 绘制图片
+         * Adaptation.dp2px(context,1)/2 等于0.5dp
          */
-        canvas.drawBitmap(source, 0, 0, paint);
-        canvas1.drawBitmap(target,0,0,paint1);
-        return target1;
+        canvas.drawBitmap(source, Adaptation.dp2px(context,1)/2, Adaptation.dp2px(context,1)/2, paint);
+        return bitmap;
     }
 }

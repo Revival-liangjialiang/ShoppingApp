@@ -20,7 +20,6 @@ public class Volley_Request {
     String[] pic_address;
     RequestQueue requestQueue;
     int value = 0;
-    boolean b = true;
     Baby_Activity m;
     Handler handler = new Handler(){
         @Override

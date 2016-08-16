@@ -2,6 +2,7 @@ package com.example.k.shoppingapp.Util.BabyActivityUtil;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -154,6 +155,7 @@ public class PullUpToLoadMore extends ViewGroup {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        Log.i("ok","PullUpToLoadMore()类的onTouchEvent()方法被调用！");
         int y = (int) event.getY();
         velocityTracker.addMovement(event);
 

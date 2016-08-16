@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -32,16 +33,36 @@
             </RelativeLayout>
         </com.example.k.shoppingapp.Util.BabyActivityUtil.MyScrollView>
         <com.example.k.shoppingapp.Util.BabyActivityUtil.MyScrollView
+            android:fillViewport="true"
             android:id="@+id/ms"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#9090"
             >
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/baby_recyclerView"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-            </android.support.v7.widget.RecyclerView>
+                <com.flyco.tablayout.CommonTabLayout
+                    android:id="@+id/baby_activity_tab"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:background="#ffffff"
+                    tl:tl_iconHeight="24dp"
+                    tl:tl_iconWidth="24dp"
+                    tl:tl_indicator_color="#2C97DE"
+                    tl:tl_indicator_height="0dp"
+                    tl:tl_textSelectColor="#FF6800"
+                    tl:tl_textUnselectColor="#868D9F"
+                    tl:tl_textsize="14sp"
+                    tl:tl_underline_color="#DDDDDD"
+                    tl:tl_underline_height="1dp" />
+                <com.example.k.shoppingapp.Extend.Baby_Activity_Extend.customViewPager
+                    android:layout_below="@+id/baby_activity_tab"
+                    android:id="@+id/baby_activity_viewPager_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </com.example.k.shoppingapp.Extend.Baby_Activity_Extend.customViewPager>
+            </RelativeLayout>
         </com.example.k.shoppingapp.Util.BabyActivityUtil.MyScrollView>
     </com.example.k.shoppingapp.Util.BabyActivityUtil.PullUpToLoadMore>
     <include layout="@layout/baby_activity_loading_layout"></include>

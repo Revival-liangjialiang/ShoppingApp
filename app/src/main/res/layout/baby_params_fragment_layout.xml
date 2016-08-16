@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.k.shoppingapp.Extend.Baby_Activity_Extend.MyLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/f2"
+    android:background="@android:color/holo_blue_dark"
+    android:layout_height="match_parent">
+
+</com.example.k.shoppingapp.Extend.Baby_Activity_Extend.MyLinearLayout>

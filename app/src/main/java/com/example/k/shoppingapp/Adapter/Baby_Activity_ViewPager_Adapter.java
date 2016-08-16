@@ -5,11 +5,9 @@ import android.graphics.Bitmap;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.view.View;
 
 import com.example.k.shoppingapp.Activity.MainActivity;
 import com.example.k.shoppingapp.Fragment.Baby_Actibity_ViewPager_Fragment.Fragment_1;
-import com.example.k.shoppingapp.Fragment.Baby_Actibity_ViewPager_Fragment.Fragment_2;
 
 /**
  * Created by k on 2016/8/5.

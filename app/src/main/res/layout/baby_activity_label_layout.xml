@@ -387,13 +387,11 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <ImageView
+    <com.example.k.shoppingapp.Other.SquareBlockView
+        android:id="@+id/sss"
         android:layout_margin="7dp"
-        android:background="@drawable/jin_background"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/jin"
         />
     <TextView
         android:layout_gravity="center_vertical"
@@ -583,6 +581,7 @@
                 android:layout_height="2dp" />
             <TextView
                 android:gravity="center"
+                android:textSize="10dp"
                 android:text="继续拖动,查看图片详情"
                 android:layout_weight="1"
                 android:layout_width="0dp"

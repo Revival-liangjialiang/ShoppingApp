@@ -23,12 +23,16 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.k.shoppingapp.Adapter.BabyActivity_RecyclerViewAdapter;
+import com.example.k.shoppingapp.Adapter.Baby_Activity_ViewPager_2_Adapter;
 import com.example.k.shoppingapp.Extend.Baby_Activity_Extend.FullyLinearLayoutManager;
 import com.example.k.shoppingapp.Other.MyView;
+import com.example.k.shoppingapp.Other.SquareBlockView;
 import com.example.k.shoppingapp.Other.SystemBarTintManager;
+import com.example.k.shoppingapp.Other.Title_address;
 import com.example.k.shoppingapp.Other.pic_path;
 import com.example.k.shoppingapp.R;
 import com.example.k.shoppingapp.Util.BabyActivityUtil.ImageSize;
@@ -36,9 +40,14 @@ import com.example.k.shoppingapp.Util.BabyActivityUtil.MyScrollView;
 import com.example.k.shoppingapp.Util.BabyActivityUtil.RequestListener;
 import com.example.k.shoppingapp.Util.BabyActivityUtil.Volley_DetailsPageRequest;
 import com.example.k.shoppingapp.Util.BabyActivityUtil.Volley_Request;
+import com.example.k.shoppingapp.Util.TabEntity;
+import com.flyco.tablayout.CommonTabLayout;
+import com.flyco.tablayout.listener.CustomTabEntity;
+import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.merhold.extensiblepageindicator.ExtensiblePageIndicator;
 import com.victor.loading.rotate.RotateLoading;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -46,22 +55,25 @@ import java.util.HashMap;
  * Created by k on 2016/8/5.
  */
 public class Baby_Activity extends AppCompatActivity {
+    private CommonTabLayout tab;
+    ArrayList<CustomTabEntity> list = new ArrayList<>();
+    String title[] = {"图片详情","产品参数", "店铺推荐"};
+
+    SquareBlockView squareBlockView;
+    TextView baby_tiele;
     private MyView myView;
     public ViewPager viewPager;
-    public RecyclerView recyclerView;
+    ViewPager viewPager_2;
     public RelativeLayout loading_layout;
-    Bitmap[] bitmap_array = new Bitmap[10];
     public RotateLoading rotateLoading;
     public ExtensiblePageIndicator extensiblePageIndicator;
     public LruCache<String, Bitmap> cache;
     public HashMap<String,ImageSize> imageSizeHashMap = new HashMap<>();
     //得到本进程的最大可用内存
     int maxCacheSize;
-    int value = 0;
-    int head_pic_path_value = 0;
-    int details_pic_address_value = 0;
-
-
+    public int head_pic_path_value = 0;
+    public int details_pic_address_value = 0;
+    public int title_address_offset_value = 0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,19 +81,35 @@ public class Baby_Activity extends AppCompatActivity {
         Intent intent = getIntent();
         head_pic_path_value = intent.getIntExtra("value",0);
         details_pic_address_value = intent.getIntExtra("value_2",0);
+        title_address_offset_value = intent.getIntExtra("value_3",0);
         initSystemSetup();
         initView();
         setLruCache();
-        //启动宝贝活动的图片请求
-        startRequest();
-
+        initTabArrayListData();
     }
 
+    private void initTabArrayListData() {
+        for(int a = 0;a<title.length;a++){
+            list.add(new TabEntity(title[a], 0, 0));
+        }
+        tab.setTabData(list);
+        tab.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelect(int position) {
+                //TODO
+            }
+
+            @Override
+            public void onTabReselect(int position) {
+
+            }
+        });
+    }
 
 
     private void setLruCache() {
         maxCacheSize = (int) Runtime.getRuntime().maxMemory();
-        cache = new LruCache<String, Bitmap>(maxCacheSize / 11) {
+        cache = new LruCache<String, Bitmap>(maxCacheSize / 6) {
             @Override
             protected int sizeOf(String key, Bitmap value) {
 //返回单位也是字节（B）
@@ -91,35 +119,23 @@ public class Baby_Activity extends AppCompatActivity {
 
     }
 
-    private void startRequest() {
-        new Volley_Request(pic_path.baby_hrad_pic_address[head_pic_path_value], this).StartImageRequest();
-        Volley_DetailsPageRequest v = new Volley_DetailsPageRequest(this, pic_path.details_page_pic_address[details_pic_address_value]);
-        v.setRequestListener(new RequestListener() {
-            @Override
-            public void getImage(Bitmap bitmap) {
-                cache.put(pic_path.details_page_pic_address[details_pic_address_value][value], bitmap);
-                value++;
-                if (value == pic_path.details_page_pic_address[details_pic_address_value].length) {
-                    recyclerView.setAdapter(new BabyActivity_RecyclerViewAdapter(Baby_Activity.this, pic_path.details_page_pic_address[details_pic_address_value]));
-                }
-            }
-        });
-        v.startRequest();
-    }
-
     private void initView() {
+        //TODO
+        viewPager_2 = (ViewPager)findViewById(R.id.baby_activity_viewPager_2);
+        viewPager_2.setAdapter(new Baby_Activity_ViewPager_2_Adapter(getSupportFragmentManager()));
+        //viewPager_2.setOffscreenPageLimit(3);
+        tab = (CommonTabLayout) findViewById(R.id.baby_activity_tab);
+        squareBlockView = (SquareBlockView)findViewById(R.id.sss);
+        squareBlockView.bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.jin);
+        squareBlockView.postInvalidate();
+        baby_tiele = (TextView)findViewById(R.id.baby_tiele);
+        baby_tiele.setText(Title_address.title[title_address_offset_value]);
          myView = (MyView)findViewById(R.id.baby_user);
-        recyclerView = (RecyclerView) findViewById(R.id.baby_recyclerView);
         loading_layout = (RelativeLayout) findViewById(R.id.loading_layout);
         rotateLoading = (RotateLoading) findViewById(R.id.rotateloading);
         rotateLoading.start();
-        //TODO 加载完毕之后要关闭 rotateLoading.stop();
         viewPager = (ViewPager) findViewById(R.id.baby_activity_viewPager);
         extensiblePageIndicator = (ExtensiblePageIndicator) findViewById(R.id.flexibleIndicator);
-        FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(this);
-        recyclerView.setNestedScrollingEnabled(false);
-        //设置布局管理器
-        recyclerView.setLayoutManager(linearLayoutManager);
         myView.bitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.user);
         myView.postInvalidate();
     }
