@@ -15,7 +15,6 @@ import com.example.k.shoppingapp.Fragment.Baby_Actibity_ViewPager_Fragment.Fragm
 public class Baby_Activity_ViewPager_Adapter extends FragmentPagerAdapter{
     Bitmap[] bitmap = new Bitmap[10];
     int a = 0;
-    MainActivity m;
     public Baby_Activity_ViewPager_Adapter(FragmentManager fm,Bitmap[] b)
     {
         super(fm);

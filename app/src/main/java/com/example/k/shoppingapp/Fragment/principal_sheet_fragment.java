@@ -142,11 +142,11 @@ public class principal_sheet_fragment extends Fragment implements View.OnClickLi
 
     private class TestLoopAdapter extends LoopPagerAdapter {
         public int[] imgs = {
-                R.mipmap.a,
-                R.mipmap.b,
-                R.mipmap.c,
-                R.mipmap.d,
-                R.mipmap.e,
+                R.mipmap.aa,
+                R.mipmap.bb,
+                R.mipmap.cc,
+                R.mipmap.ff,
+                R.mipmap.ee,
         };
 
         public TestLoopAdapter(RollPagerView viewPager) {
@@ -197,13 +197,25 @@ public class principal_sheet_fragment extends Fragment implements View.OnClickLi
                 startActivity(intent_1);
                 break;
             case 2:
-                Toast.makeText(getActivity(), "3", Toast.LENGTH_SHORT).show();
+                Intent intent_2 = new Intent(getContext(),Baby_Activity.class);
+                intent_2.putExtra("value",2);
+                intent_2.putExtra("value_2",2);
+                intent_2.putExtra("value_3",2);
+                startActivity(intent_2);
                 break;
             case 3:
-                Toast.makeText(getActivity(), "4", Toast.LENGTH_SHORT).show();
+                Intent intent_3 = new Intent(getContext(),Baby_Activity.class);
+                intent_3.putExtra("value",3);
+                intent_3.putExtra("value_2",3);
+                intent_3.putExtra("value_3",3);
+                startActivity(intent_3);
                 break;
             case 4:
-                Toast.makeText(getActivity(), "5", Toast.LENGTH_SHORT).show();
+                Intent intent_4 = new Intent(getContext(),Baby_Activity.class);
+                intent_4.putExtra("value",4);
+                intent_4.putExtra("value_2",4);
+                intent_4.putExtra("value_3",4);
+                startActivity(intent_4);
                 break;
             case R.id.nvzhuang:
                 Toast.makeText(getActivity(), "女装", Toast.LENGTH_SHORT).show();

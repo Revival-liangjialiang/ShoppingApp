@@ -28,6 +28,11 @@ public class PullUpToLoadMore extends ViewGroup {
     float valueY = 0;
     float Y = 0;
 
+    //TODO------Revival------处理下拉才进行网络请求详情页的图片
+    boolean FirstDrop = true;
+    //TODO ---------Revival----------监听下拉操作
+    DropListener listener;
+
     int currPosition = 0;
     int position1Y;
     int lastY;
@@ -116,7 +121,7 @@ public class PullUpToLoadMore extends ViewGroup {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        switch (MotionEventCompat.getActionMasked(ev)){
+        switch (MotionEventCompat.getActionMasked(ev)) {
             case MotionEvent.ACTION_DOWN:
                 valueX = ev.getX();
                 valueY = ev.getY();
@@ -128,24 +133,25 @@ public class PullUpToLoadMore extends ViewGroup {
                 Y = 0;
                 break;
             case MotionEvent.ACTION_MOVE:
-                if(valueX>ev.getX()){
-                    X=valueX-ev.getX();
-                }else{
-                    X = ev.getX()-valueX;
+                if (valueX > ev.getX()) {
+                    X = valueX - ev.getX();
+                } else {
+                    X = ev.getX() - valueX;
                 }
-                if(valueY>ev.getY()){
-                    Y=valueY-ev.getY();
-                }else{
-                    Y = ev.getY()-valueY;
+                if (valueY > ev.getY()) {
+                    Y = valueY - ev.getY();
+                } else {
+                    Y = ev.getY() - valueY;
                 }
                 break;
-            default:break;
+            default:
+                break;
         }
-            if (reValue.re_value == 0) {
-                bottomScrollVIewIsInTop = true;
-            } else {
-                bottomScrollVIewIsInTop = false;
-            }
+        if (reValue.re_value == 0) {
+            bottomScrollVIewIsInTop = true;
+        } else {
+            bottomScrollVIewIsInTop = false;
+        }
         //防止子View禁止父view拦截事件
         this.requestDisallowInterceptTouchEvent(false);
         return super.dispatchTouchEvent(ev);
@@ -165,10 +171,10 @@ public class PullUpToLoadMore extends ViewGroup {
 
                     //判断是否是向上滑动和是否在第一屏
                     if (dy > 0 && currPosition == 0) {
-                            if (dy >= scaledTouchSlop) {
-                                isIntercept = true;//拦截事件
-                                lastY = y;
-                            }
+                        if (dy >= scaledTouchSlop) {
+                            isIntercept = true;//拦截事件
+                            lastY = y;
+                        }
                     }
                 }
 
@@ -178,7 +184,7 @@ public class PullUpToLoadMore extends ViewGroup {
                     if (dy < 0 && currPosition == 1) {
                         if (Math.abs(dy) >= scaledTouchSlop) {
                             //TODO Revival 纵向滑动才可进入
-                            if(X+2<Y) {
+                            if (X + 2 < Y) {
                                 isIntercept = true;
                             }
                         }
@@ -187,12 +193,12 @@ public class PullUpToLoadMore extends ViewGroup {
 
                 break;
         }
-       return isIntercept;
+        return isIntercept;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Log.i("ok","PullUpToLoadMore()类的onTouchEvent()方法被调用！");
+        Log.i("ok", "PullUpToLoadMore()类的onTouchEvent()方法被调用！");
         int y = (int) event.getY();
         velocityTracker.addMovement(event);
 
@@ -255,15 +261,29 @@ public class PullUpToLoadMore extends ViewGroup {
     //通过Scroller实现弹性滑动
     private void smoothScroll(int tartY) {
         int dy = tartY - getScrollY();
-        scroller.startScroll(getScrollX(), getScrollY(), 0, dy,1000);
+        scroller.startScroll(getScrollX(), getScrollY(), 0, dy, 1000);
         invalidate();
     }
 
     @Override
     public void computeScroll() {
         if (scroller.computeScrollOffset()) {
+            //TODO 第一次下拉才进行详情页网络请求，目的为节省流量
+            if (scroller.isFinished() == true && currPosition == 1 && FirstDrop) {
+                listener.drop();
+                FirstDrop = false;
+            }
             scrollTo(scroller.getCurrX(), scroller.getCurrY());
             postInvalidate();
         }
+    }
+
+    //TODO -----Revival--- 监听下拉操作接口
+    public interface DropListener {
+        void drop();
+    }
+
+    public void setDropListener(DropListener listener) {
+        this.listener = listener;
     }
 }

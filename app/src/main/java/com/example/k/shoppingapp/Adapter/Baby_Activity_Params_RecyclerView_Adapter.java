@@ -16,7 +16,7 @@ import org.w3c.dom.Text;
  */
 public class Baby_Activity_Params_RecyclerView_Adapter extends RecyclerView.Adapter<Baby_Activity_Params_RecyclerView_Adapter.MyViewHolder> {
     String[] str1 = {"流行元素", "袖长", "服装版型", "衣长", "领型", "袖型", "品牌", "成分含量", "面料", "图案文化", "适用年龄", "风格", "通勤", "年份季节", "尺码"};
-    String[] str2 = {"口袋", "长袖", "宽松", "常规型", "圆领", "常规", "桃花小妹", "30%及以下", "棉", "条纹", "创意", "18-24周岁", "通勤", "韩版", "2016年秋季", "M,L,XL"};
+    String[] str2 = {"口袋", "长袖", "宽松", "常规型", "圆领", "常规", "桃花小妹", "30%及以下", "棉", "条纹", "18-24周岁", "通勤", "韩版", "2016年秋季", "M,L,XL"};
 
     @Override
     public Baby_Activity_Params_RecyclerView_Adapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

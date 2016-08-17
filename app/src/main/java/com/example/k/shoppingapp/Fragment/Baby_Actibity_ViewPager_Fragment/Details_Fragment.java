@@ -2,6 +2,8 @@ package com.example.k.shoppingapp.Fragment.Baby_Actibity_ViewPager_Fragment;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +25,13 @@ import com.example.k.shoppingapp.Util.BabyActivityUtil.Volley_Request;
  * Created by k on 2016/8/14.
  */
 public class Details_Fragment extends Fragment {
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            b.loading_layout.setVisibility(View.GONE);
+        }
+    };
     Baby_Activity b;
     int value = 0;
     @Nullable
@@ -57,7 +66,6 @@ public class Details_Fragment extends Fragment {
 
     public RecyclerView recyclerView;
     private void startRequest() {
-        new Volley_Request(pic_path.baby_hrad_pic_address[b.head_pic_path_value], b).StartImageRequest();
         Volley_DetailsPageRequest v = new Volley_DetailsPageRequest(b, pic_path.details_page_pic_address[b.details_pic_address_value]);
         v.setRequestListener(new RequestListener() {
             @Override
@@ -67,11 +75,26 @@ public class Details_Fragment extends Fragment {
                 value++;
                 if (value == pic_path.details_page_pic_address[b.details_pic_address_value].length) {
                     recyclerView.setAdapter(new BabyActivity_Details_RecyclerViewAdapter(b, pic_path.details_page_pic_address[b.details_pic_address_value]));
-                value=0;
+                    b.rotateLoading.stop();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                Thread.sleep(500);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            Message message = new Message();
+                            handler.sendMessage(message);
+                        }
+                    }).start();
+                    value=0;
                 }
             }
         });
         v.startRequest();
+        b.loading_layout.setVisibility(View.VISIBLE);
+        b.rotateLoading.start();
     }
 
     @Override

@@ -22,8 +22,11 @@ import com.example.k.shoppingapp.Other.MyView;
 import com.example.k.shoppingapp.Other.SquareBlockView;
 import com.example.k.shoppingapp.Other.SystemBarTintManager;
 import com.example.k.shoppingapp.Other.Title_address;
+import com.example.k.shoppingapp.Other.pic_path;
 import com.example.k.shoppingapp.R;
 import com.example.k.shoppingapp.Util.BabyActivityUtil.ImageSize;
+import com.example.k.shoppingapp.Util.BabyActivityUtil.PullUpToLoadMore;
+import com.example.k.shoppingapp.Util.BabyActivityUtil.Volley_Request;
 import com.example.k.shoppingapp.Util.TabEntity;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
@@ -42,6 +45,9 @@ public class Baby_Activity extends AppCompatActivity {
     private CommonTabLayout tab;
     ArrayList<CustomTabEntity> list = new ArrayList<>();
     String title[] = {"图片详情", "产品参数", "店铺推荐"};
+
+    //下拉控件
+    PullUpToLoadMore drop_concrol;
 
     SquareBlockView squareBlockView;
     TextView baby_tiele;
@@ -71,45 +77,11 @@ public class Baby_Activity extends AppCompatActivity {
         initView();
         setLruCache();
         initTabArrayListData();
+        initViewListener();
+        new Volley_Request(pic_path.baby_hrad_pic_address[head_pic_path_value], this).StartImageRequest();
     }
 
-    private void initTabArrayListData() {
-        for (int a = 0; a < title.length; a++) {
-            list.add(new TabEntity(title[a], 0, 0));
-        }
-        tab.setTabData(list);
-        tab.setOnTabSelectListener(new OnTabSelectListener() {
-            @Override
-            public void onTabSelect(int position) {
-                viewPager_2.setCurrentItem(position);
-            }
-
-            @Override
-            public void onTabReselect(int position) {
-
-            }
-        });
-    }
-
-
-    private void setLruCache() {
-        maxCacheSize = (int) Runtime.getRuntime().maxMemory();
-        cache = new LruCache<String, Bitmap>(maxCacheSize / 6) {
-            @Override
-            protected int sizeOf(String key, Bitmap value) {
-//返回单位也是字节（B）
-                return value.getByteCount();
-            }
-        };
-
-    }
-
-    private void initView() {
-        //TODO
-        viewPager_2 = (ViewPager) findViewById(R.id.baby_activity_viewPager_2);
-        viewPager_2.setAdapter(new Baby_Activity_ViewPager_2_Adapter(getSupportFragmentManager()));
-        //viewPager_2.setOffscreenPageLimit(3);
-        tab = (CommonTabLayout) findViewById(R.id.baby_activity_tab);
+    private void initViewListener() {
         viewPager_2.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -126,17 +98,64 @@ public class Baby_Activity extends AppCompatActivity {
 
             }
         });
+        //页面下拉进行请求
+        drop_concrol.setDropListener(new PullUpToLoadMore.DropListener() {
+            @Override
+            public void drop() {
+                viewPager_2.setAdapter(new Baby_Activity_ViewPager_2_Adapter(getSupportFragmentManager()));
+            }
+        });
+        tab.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelect(int position) {
+                viewPager_2.setCurrentItem(position);
+            }
+
+            @Override
+            public void onTabReselect(int position) {
+
+            }
+        });
+    }
+
+    private void initTabArrayListData() {
+        for (int a = 0; a < title.length; a++) {
+            list.add(new TabEntity(title[a], 0, 0));
+        }
+        tab.setTabData(list);
+    }
+
+
+    private void setLruCache() {
+        maxCacheSize = (int) Runtime.getRuntime().maxMemory();
+        cache = new LruCache<String, Bitmap>(maxCacheSize / 7) {
+            @Override
+            protected int sizeOf(String key, Bitmap value) {
+//返回单位也是字节（B）
+                return value.getByteCount();
+            }
+        };
+
+    }
+
+    private void initView() {
+        //TODO
+        drop_concrol = (PullUpToLoadMore)findViewById(R.id.baby_ActivityDropConcrol);
+        viewPager_2 = (ViewPager) findViewById(R.id.baby_activity_viewPager_2);
+        //viewPager_2.setOffscreenPageLimit(3);
+        tab = (CommonTabLayout) findViewById(R.id.baby_activity_tab);
         squareBlockView = (SquareBlockView) findViewById(R.id.sss);
         squareBlockView.bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.jin);
         squareBlockView.postInvalidate();
         baby_tiele = (TextView) findViewById(R.id.baby_tiele);
         baby_tiele.setText(Title_address.title[title_address_offset_value]);
-        myView = (MyView) findViewById(R.id.baby_user);
         loading_layout = (RelativeLayout) findViewById(R.id.loading_layout);
         rotateLoading = (RotateLoading) findViewById(R.id.rotateloading);
         rotateLoading.start();
         viewPager = (ViewPager) findViewById(R.id.baby_activity_viewPager);
         extensiblePageIndicator = (ExtensiblePageIndicator) findViewById(R.id.flexibleIndicator);
+        //设置头像
+        myView = (MyView) findViewById(R.id.baby_user);
         myView.bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.user);
         myView.postInvalidate();
     }
