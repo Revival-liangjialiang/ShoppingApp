@@ -15,8 +15,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="5dp">
-
-            <include layout="@layout/homepage_navigation_bar_layout"></include>
  </com.jingchen.pulltorefresh.PullableScrollView>
     </com.jingchen.pulltorefresh.PullToRefreshLayout>
 </RelativeLayout>

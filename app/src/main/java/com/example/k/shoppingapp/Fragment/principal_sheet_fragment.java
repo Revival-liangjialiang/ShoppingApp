@@ -40,8 +40,10 @@ public class principal_sheet_fragment extends Fragment implements View.OnClickLi
     final int WE_CODE = 5;
     //Home navigation
     ImageView we_code_ImageView;
+    ImageView xianshiImage;
     TextView search_TextView;
-    int jishiPicArrayId[] = {R.mipmap.jishi,R.mipmap.jishiyou,R.mipmap.jishiyouxiao1,R.mipmap.jishiyouxiao2};
+    //今日头条下的四个展示位
+    int jishiPicArrayId[] = {R.mipmap.a54,R.mipmap.a625,R.mipmap.a325,R.mipmap.a325_2};
     ImageView jishi,jishiyou,jishiyouxiao1,jishiyouxiao2,chaoshihuiTOP;
     Handler handler = new Handler(){
         @Override
@@ -68,6 +70,7 @@ public class principal_sheet_fragment extends Fragment implements View.OnClickLi
     }
 
     private void initjishiView() {
+        //TODO-----------------------------------------
         chaoshihuiTOP = (ImageView)getActivity().findViewById(R.id.chaoshihuiTOP);
         jishi = (ImageView)getActivity().findViewById(R.id.xianshiImager);
         jishiyou  = (ImageView)getActivity().findViewById(R.id.jishiyouImager);
@@ -79,6 +82,10 @@ public class principal_sheet_fragment extends Fragment implements View.OnClickLi
             jishiyou.setImageBitmap(decodeSampledBitmapFromResource(getResources(), jishiPicArrayId[1],300 ,175));
             jishiyouxiao1.setImageBitmap(decodeSampledBitmapFromResource(getResources(), jishiPicArrayId[2],300 ,250));
             jishiyouxiao2.setImageBitmap(decodeSampledBitmapFromResource(getResources(), jishiPicArrayId[3],300 ,250));
+            jishi.setOnClickListener(this);
+            jishiyou.setOnClickListener(this);
+            jishiyouxiao1.setOnClickListener(this);
+            jishiyouxiao2.setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -138,6 +145,8 @@ public class principal_sheet_fragment extends Fragment implements View.OnClickLi
         qinglvzhuang.setOnClickListener(this);
         we_code_ImageView.setOnClickListener(this);
         search_TextView.setOnClickListener(this);
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.RGB_565;
     }
 
     private class TestLoopAdapter extends LoopPagerAdapter {
@@ -176,7 +185,6 @@ public class principal_sheet_fragment extends Fragment implements View.OnClickLi
         }
 
     }
-
     //图片点击事件
     public void onClick(View v) {
         switch (v.getId()) {
@@ -197,6 +205,7 @@ public class principal_sheet_fragment extends Fragment implements View.OnClickLi
                 startActivity(intent_1);
                 break;
             case 2:
+                //轮播图第三张
                 Intent intent_2 = new Intent(getContext(),Baby_Activity.class);
                 intent_2.putExtra("value",2);
                 intent_2.putExtra("value_2",2);
@@ -204,6 +213,7 @@ public class principal_sheet_fragment extends Fragment implements View.OnClickLi
                 startActivity(intent_2);
                 break;
             case 3:
+                //轮播图第四张
                 Intent intent_3 = new Intent(getContext(),Baby_Activity.class);
                 intent_3.putExtra("value",3);
                 intent_3.putExtra("value_2",3);
@@ -211,11 +221,45 @@ public class principal_sheet_fragment extends Fragment implements View.OnClickLi
                 startActivity(intent_3);
                 break;
             case 4:
+                //轮播图第五张
                 Intent intent_4 = new Intent(getContext(),Baby_Activity.class);
                 intent_4.putExtra("value",4);
                 intent_4.putExtra("value_2",4);
                 intent_4.putExtra("value_3",4);
                 startActivity(intent_4);
+                break;
+            //TODO----------------------------------
+            //限时展示图片1事件
+            case R.id.xianshiImager:
+                Intent intent_5 = new Intent(getContext(),Baby_Activity.class);
+                intent_5.putExtra("value",2);
+                intent_5.putExtra("value_2",2);
+                intent_5.putExtra("value_3",2);
+                startActivity(intent_5);
+                break;
+            //限时展示右边第一张图片点击事件
+            case R.id.jishiyouImager:
+                Intent intent_6 = new Intent(getContext(),Baby_Activity.class);
+                intent_6.putExtra("value",0);
+                intent_6.putExtra("value_2",0);
+                intent_6.putExtra("value_3",0);
+                startActivity(intent_6);
+                break;
+            //限时展示右边下面第一张图片点击事件
+            case R.id.jishiyouxiao1:
+                Intent intent_7 = new Intent(getContext(),Baby_Activity.class);
+                intent_7.putExtra("value",0);
+                intent_7.putExtra("value_2",0);
+                intent_7.putExtra("value_3",0);
+                startActivity(intent_7);
+                break;
+            //限时展示右边下面第二张图片点击事件
+            case R.id.jishiyouxiao2:
+                Intent intent_8 = new Intent(getContext(),Baby_Activity.class);
+                intent_8.putExtra("value",1);
+                intent_8.putExtra("value_2",1);
+                intent_8.putExtra("value_3",1);
+                startActivity(intent_8);
                 break;
             case R.id.nvzhuang:
                 Toast.makeText(getActivity(), "女装", Toast.LENGTH_SHORT).show();
