@@ -16,31 +16,31 @@
         android:layout_weight="1"
         >
         <ImageView
+            android:id="@+id/chao1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:background="#9090"
             style="@style/super_Style"
             />
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#909"
+            android:id="@+id/chao2"
             style="@style/super_Style"
             />
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#9030"
+            android:id="@+id/chao3"
             style="@style/super_Style"
             />
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#8832"
+            android:id="@+id/chao4"
             style="@style/super_Style"
             />
     </TableRow>
@@ -53,24 +53,25 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:background="#5786"
+            android:id="@+id/chao5"
             style="@style/super_Style"
             />
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#8712"
+            android:id="@+id/chao6"
             style="@style/super_Style"
             />
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#9090fd"
+            android:id="@+id/chao7"
             style="@style/super_Style"
             />
         <ImageView
+            android:id="@+id/chao8"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

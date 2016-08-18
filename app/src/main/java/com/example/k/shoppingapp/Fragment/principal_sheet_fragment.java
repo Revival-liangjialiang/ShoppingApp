@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -45,6 +46,7 @@ public class principal_sheet_fragment extends Fragment implements View.OnClickLi
     //今日头条下的四个展示位
     int jishiPicArrayId[] = {R.mipmap.a54,R.mipmap.a625,R.mipmap.a325,R.mipmap.a325_2};
     ImageView jishi,jishiyou,jishiyouxiao1,jishiyouxiao2,chaoshihuiTOP;
+    ImageView chao1,chao2,chao3,chao4,chao5,chao6,chao7,chao8;
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -77,7 +79,7 @@ public class principal_sheet_fragment extends Fragment implements View.OnClickLi
         jishiyouxiao1 = (ImageView)getActivity().findViewById(R.id.jishiyouxiao1);
         jishiyouxiao2  = (ImageView)getActivity().findViewById(R.id.jishiyouxiao2);
         try {
-            chaoshihuiTOP.setImageBitmap(decodeSampledBitmapFromResource(getResources(), R.mipmap.chaoshihuitop,800 ,214));
+            chaoshihuiTOP.setImageBitmap(decodeSampledBitmapFromResource(getResources(), R.mipmap.sky,800 ,214));
             jishi.setImageBitmap(decodeSampledBitmapFromResource(getResources(), jishiPicArrayId[0],300 ,400));
             jishiyou.setImageBitmap(decodeSampledBitmapFromResource(getResources(), jishiPicArrayId[1],300 ,175));
             jishiyouxiao1.setImageBitmap(decodeSampledBitmapFromResource(getResources(), jishiPicArrayId[2],300 ,250));
@@ -86,9 +88,20 @@ public class principal_sheet_fragment extends Fragment implements View.OnClickLi
             jishiyou.setOnClickListener(this);
             jishiyouxiao1.setOnClickListener(this);
             jishiyouxiao2.setOnClickListener(this);
+            chaoshihuiTOP.setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.RGB_565;
+        chao1.setImageBitmap(BitmapFactory.decodeResource(getResources(),R.mipmap.chao1));
+        chao2.setImageBitmap(BitmapFactory.decodeResource(getResources(),R.mipmap.chao3));
+        chao3.setImageBitmap(BitmapFactory.decodeResource(getResources(),R.mipmap.chao8));
+        chao4.setImageBitmap(BitmapFactory.decodeResource(getResources(),R.mipmap.chao5));
+        chao5.setImageBitmap(BitmapFactory.decodeResource(getResources(),R.mipmap.chao2));
+        chao6.setImageBitmap(BitmapFactory.decodeResource(getResources(),R.mipmap.chao6));
+        chao7.setImageBitmap(BitmapFactory.decodeResource(getResources(),R.mipmap.chao7));
+        chao8.setImageBitmap(BitmapFactory.decodeResource(getResources(),R.mipmap.chao4));
     }
 
     private void initCountdownView() {
@@ -117,6 +130,14 @@ public class principal_sheet_fragment extends Fragment implements View.OnClickLi
     }
 
     private void initView() {
+        chao1 = (ImageView)getActivity().findViewById(R.id.chao1);
+        chao2 = (ImageView)getActivity().findViewById(R.id.chao2);
+        chao3 = (ImageView)getActivity().findViewById(R.id.chao3);
+        chao4 = (ImageView)getActivity().findViewById(R.id.chao4);
+        chao5 = (ImageView)getActivity().findViewById(R.id.chao5);
+        chao6 = (ImageView)getActivity().findViewById(R.id.chao6);
+        chao7 = (ImageView)getActivity().findViewById(R.id.chao7);
+        chao8 = (ImageView)getActivity().findViewById(R.id.chao8);
         search_TextView = (TextView)getActivity().findViewById(R.id.search_TextView);
         we_code_ImageView = (ImageView)getActivity().findViewById(R.id.we_code_ImageView);
         mRollViewPager = (RollPagerView) getActivity().findViewById(R.id.roll_view_pager);
@@ -147,6 +168,14 @@ public class principal_sheet_fragment extends Fragment implements View.OnClickLi
         search_TextView.setOnClickListener(this);
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.RGB_565;
+        chao1.setOnClickListener(this);
+        chao2.setOnClickListener(this);
+        chao3.setOnClickListener(this);
+        chao4.setOnClickListener(this);
+        chao5.setOnClickListener(this);
+        chao6.setOnClickListener(this);
+        chao7.setOnClickListener(this);
+        chao8.setOnClickListener(this);
     }
 
     private class TestLoopAdapter extends LoopPagerAdapter {
@@ -260,6 +289,69 @@ public class principal_sheet_fragment extends Fragment implements View.OnClickLi
                 intent_8.putExtra("value_2",1);
                 intent_8.putExtra("value_3",1);
                 startActivity(intent_8);
+                break;
+            case R.id.chaoshihuiTOP:
+                Intent intent_9 = new Intent(getContext(),Baby_Activity.class);
+                intent_9.putExtra("value",4);
+                intent_9.putExtra("value_2",4);
+                intent_9.putExtra("value_3",4);
+                startActivity(intent_9);
+                break;
+            case R.id.chao1:
+                Intent intent_10 = new Intent(getContext(),Baby_Activity.class);
+                intent_10.putExtra("value",1);
+                intent_10.putExtra("value_2",1);
+                intent_10.putExtra("value_3",1);
+                startActivity(intent_10);
+                break;
+            case R.id.chao2:
+                Intent intent_11 = new Intent(getContext(),Baby_Activity.class);
+                intent_11.putExtra("value",4);
+                intent_11.putExtra("value_2",4);
+                intent_11.putExtra("value_3",4);
+                startActivity(intent_11);
+                break;
+            case R.id.chao3:
+                Intent intent_12 = new Intent(getContext(),Baby_Activity.class);
+                intent_12.putExtra("value",4);
+                intent_12.putExtra("value_2",4);
+                intent_12.putExtra("value_3",4);
+                startActivity(intent_12);
+                break;
+            case R.id.chao4:
+                Intent intent_13 = new Intent(getContext(),Baby_Activity.class);
+                intent_13.putExtra("value",5);
+                intent_13.putExtra("value_2",5);
+                intent_13.putExtra("value_3",5);
+                startActivity(intent_13);
+                break;
+            case R.id.chao5:
+                Intent intent_14 = new Intent(getContext(),Baby_Activity.class);
+                intent_14.putExtra("value",2);
+                intent_14.putExtra("value_2",2);
+                intent_14.putExtra("value_3",2);
+                startActivity(intent_14);
+                break;
+            case R.id.chao6:
+                Intent intent_15 = new Intent(getContext(),Baby_Activity.class);
+                intent_15.putExtra("value",2);
+                intent_15.putExtra("value_2",2);
+                intent_15.putExtra("value_3",2);
+                startActivity(intent_15);
+                break;
+            case R.id.chao7:
+                Intent intent_16 = new Intent(getContext(),Baby_Activity.class);
+                intent_16.putExtra("value",2);
+                intent_16.putExtra("value_2",2);
+                intent_16.putExtra("value_3",2);
+                startActivity(intent_16);
+                break;
+            case R.id.chao8:
+                Intent intent_17 = new Intent(getContext(),Baby_Activity.class);
+                intent_17.putExtra("value",1);
+                intent_17.putExtra("value_2",1);
+                intent_17.putExtra("value_3",1);
+                startActivity(intent_17);
                 break;
             case R.id.nvzhuang:
                 Toast.makeText(getActivity(), "女装", Toast.LENGTH_SHORT).show();
