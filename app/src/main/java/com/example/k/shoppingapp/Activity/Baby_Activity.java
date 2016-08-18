@@ -189,4 +189,8 @@ public class Baby_Activity extends AppCompatActivity {
     //监听网络变化
 
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

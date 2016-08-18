@@ -6,7 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.example.k.shoppingapp.Other.Title_address;
 import com.example.k.shoppingapp.R;
 
 /**
@@ -24,6 +26,7 @@ public class Baby_Activity_RecommendAdapter extends RecyclerView.Adapter<Baby_Ac
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.image.setOnClickListener(this);
+        holder.textView.setText(Title_address.title[position]);
         holder.image.setImageResource(pic_ID[position]);
         holder.image.setTag(position);
     }
@@ -41,9 +44,11 @@ public class Baby_Activity_RecommendAdapter extends RecyclerView.Adapter<Baby_Ac
     }
     class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
+        TextView textView;
         public MyViewHolder(View itemView) {
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.recommend_image);
+            textView = (TextView)itemView.findViewById(R.id.baby_re_item_title);
         }
     }
     public interface RecyclerViewItemClickListener {

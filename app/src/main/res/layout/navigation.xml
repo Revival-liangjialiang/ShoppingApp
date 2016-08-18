@@ -6,28 +6,30 @@
     android:background="#FF6800"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal">
-<LinearLayout
+<RelativeLayout
     android:layout_width="0dp"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     app:layout_widthPercent="15%w"
-    android:orientation="vertical"
     >
     <ImageView
+       android:layout_above="@+id/sao"
+        android:layout_marginBottom="2dp"
         android:id="@+id/we_code_ImageView"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_gravity="center_horizontal"
         android:scaleType="centerCrop"
         android:background="@drawable/ic_account_balance_black_24dp"
-        />
+        android:layout_centerHorizontal="true" />
     <TextView
+        android:id="@+id/sao"
+        android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
         android:textColor="#FFFFFF"
         android:text="扫一扫"
         />
-</LinearLayout>
+</RelativeLayout>
     <com.example.k.shoppingapp.Util.PercentRelativeLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"

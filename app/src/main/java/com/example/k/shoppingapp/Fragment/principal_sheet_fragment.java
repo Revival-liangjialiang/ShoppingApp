@@ -142,11 +142,11 @@ public class principal_sheet_fragment extends Fragment implements View.OnClickLi
 
     private class TestLoopAdapter extends LoopPagerAdapter {
         public int[] imgs = {
-                R.mipmap.aa,
-                R.mipmap.bb,
-                R.mipmap.cc,
-                R.mipmap.ff,
-                R.mipmap.ee,
+                R.mipmap.ok1,
+                R.mipmap.ok2,
+                R.mipmap.ok3,
+                R.mipmap.ok4,
+                R.mipmap.ok5,
         };
 
         public TestLoopAdapter(RollPagerView viewPager) {

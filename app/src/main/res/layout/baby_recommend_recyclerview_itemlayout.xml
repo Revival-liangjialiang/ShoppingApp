@@ -17,20 +17,35 @@
     app:layout_heightPercent="100%w"
     />
     <TextView
-        android:text="标题"
+        android:id="@+id/baby_re_item_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:layout_centerVertical="true"
+            android:id="@+id/mo"
+            android:layout_alignParentLeft="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:text="￥"
+            android:textColor="@color/titlec"
+            />
+        <TextView
+            android:textSize="20sp"
+            android:layout_toRightOf="@+id/mo"
+            android:textColor="@color/titlec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:text="39"
             />
         <TextView
+            android:textSize="11sp"
+            android:textColor="@color/title_color"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="477人付款"

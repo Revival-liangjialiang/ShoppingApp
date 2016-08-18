@@ -1,6 +1,7 @@
 package com.example.k.shoppingapp.Util.BabyActivityUtil;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.android.volley.RequestQueue;
@@ -13,6 +14,10 @@ import com.example.k.shoppingapp.Activity.Baby_Activity;
  * Created by k on 2016/8/13.
  */
 public class Volley_DetailsPageRequest {
+    //处理图片乱序字段，实现同步加载
+    private boolean B_1 = true, B_2 = true;
+    private int a = 0;
+
     Baby_Activity baby_activity;
     String[] pic_address;
     RequestListener requestListener;
@@ -22,15 +27,33 @@ public class Volley_DetailsPageRequest {
         this.pic_address = pic_address;
     }
     public void startRequest(){
-        requestQueue = Volley.newRequestQueue(baby_activity);
-        for(int a = 0;a<pic_address.length;a++) {
-            requestQueue.add(new ImageRequest(pic_address[a],new Response.Listener<Bitmap>(){
-                @Override
-                public void onResponse(Bitmap response) {
-                        requestListener.getImage(response);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (B_1) {
+                    if (B_2) {
+                        Log.i("ok","请求1次 a = "+a);
+                        requestQueue = Volley.newRequestQueue(baby_activity);
+                        if(a < pic_address.length) {
+                            requestQueue.add(new ImageRequest(pic_address[a], new Response.Listener<Bitmap>() {
+                                @Override
+                                public void onResponse(Bitmap response) {
+                                    requestListener.getImage(response);
+                                    B_2 = true;
+                                }
+                            }, 720, 0, ImageView.ScaleType.CENTER_CROP, null, null));
+                        }else{
+                            B_1 = false;
+                            a = 0;
+                        }
+                            B_2 = false;
+                        a++;
+                        }
+
                 }
-            },720,0, ImageView.ScaleType.CENTER_CROP,null,null));
-        }
+            }
+        }).start();
+
     }
     public void setRequestListener(RequestListener listener){
         this.requestListener = listener;
